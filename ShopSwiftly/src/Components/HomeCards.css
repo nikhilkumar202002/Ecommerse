@@ -44,6 +44,7 @@
 .homeCarddetails{
     /* position: absolute; */
     padding-top: 200px;
+    padding-left: 15px;
 }
 .homeproductmore{
     text-align: center;
@@ -63,6 +64,20 @@
     transition: .5s;
     color: #FD7B2B;
     border: 1px solid #FD7B2B;
+}
+.pname p{
+    font-size: 16px;
+    font-family: "Poppins";
+}
+.productDetails p{
+    font-size: 15px;
+    font-family: "Poppins";
 
 }
-
+.productDetails .offer{
+    font-size: 20px;
+}
+.productDetails span{
+    font-size: 15px;
+    font-weight: 600;
+}
