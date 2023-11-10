@@ -20,10 +20,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
-                        <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <span><p>$300</p></span>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -38,10 +38,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -56,10 +56,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -74,10 +74,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -92,10 +92,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -110,10 +110,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -128,10 +128,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -146,10 +146,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -164,10 +164,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -182,10 +182,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -200,10 +200,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 
@@ -218,10 +218,10 @@ function HomeCards() {
                     <div className='pname'>
                         <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
                     </div>
-                    <div className='productDestails'>
+                    <div className='productDetails'>
                         <p>Rating</p>
                         <p>$300</p>
-                        <p className='pr'>$200</p>
+                        <p className='offer'>$200</p>
                     </div>
                    
                 

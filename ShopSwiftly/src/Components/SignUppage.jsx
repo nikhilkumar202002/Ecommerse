@@ -1,6 +1,6 @@
 import React,{useRef, useState} from 'react'
 import './SignUppage.css'
-import Signinimg from '../Images/signinup.jpg'
+import Signupimg from '../Images/signupimage.jpg'
 import Axios from  '../Static/Axios'
 import { Link } from 'react-router-dom'
 function SignUppage() {
@@ -51,7 +51,7 @@ const handleSubmit = (event)=>{
         <div className='sign_in_main'>
             <div className='sign_in_left'>
                 <div className='sign_in_pattern'>
-                    <img src={Signinimg} alt="" />
+                    <img src={Signupimg} alt="" />
                 </div>
             </div>
             <div className='sign_in_right'>

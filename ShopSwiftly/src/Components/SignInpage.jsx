@@ -1,16 +1,51 @@
-import React from 'react'
+import React, { useContext, useRef } from 'react'
+import {Routes, Route, useNavigate} from 'react-router-dom';
+
 import './SignInpage.css'
-import Signinimg from '../Images/signinup.jpg'
-import { Link } from 'react-router-dom'
+import Signinimage from '../Images/signupimage.jpg'
+import { Link, json } from 'react-router-dom'
+import Axios from '../Static/Axios'
+import { UserContext } from '../Static/UserContext'
+
 
 function SignInpage() {
+          const navigate = useNavigate();
+
+          const {User,setUser} = useContext(UserContext)
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);
+
+    const handleSubmit = (event)=>{
+      event.preventDefault();
+
+      const Email = emailRef.current.value;
+      const Password = passwordRef.current.value;
+
+      const LoginData = {
+        Email,
+        Password
+      }
+      try {
+          Axios.post('/userLogin',LoginData).then((response)=>{
+            console.log(response.data)
+            const userData = JSON.stringify(response.data)
+            localStorage.setItem('Auth_info',userData)
+            setUser(userData)
+            navigate('/');
+  
+
+          })
+      }catch(error){
+        console.log(error)
+      }
+    }
   return (
     <>
     <section className='hero'>
         <div className='sign_in_main'>
             <div className='sign_in_left'>
                 <div className='sign_in_pattern'>
-                    <img src={Signinimg} alt="" />
+                    <img src={Signinimage} alt="" />
                 </div>
             </div>
             <div className='sign_in_right'>
@@ -19,9 +54,9 @@ function SignInpage() {
                   <p>Welcome Back! Enjoy your Shopping!</p>
                 </div>
                 <div className='sign_in_form'>
-                  <form action="">
-                    <input type="text" placeholder='Email or Phone Number'/><br/>
-                    <input type="password" placeholder='Password'/><br/>
+                  <form onSubmit={handleSubmit}>
+                    <input type="text" placeholder='Email or Phone Number' ref={emailRef}/><br/>
+                    <input type="password" placeholder='Password' ref={passwordRef}/><br/>
                     <div className='sign_in_forgot'>
                     <p><Link to="/signup">New User?</Link></p>
                     <p>Forgot Password?</p>

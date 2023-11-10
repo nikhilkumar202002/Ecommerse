@@ -17,6 +17,7 @@
 }
 .sign_in_left{
     width: 50%;
+    height: 550px
     
 }
 .sign_in_pattern{
@@ -28,7 +29,8 @@
 }
 .sign_in_pattern img{
     width: 100%;
-    object-fit: fill;
+    height: 550px;
+    object-fit: cover;
 
 }
 .sign_in_heading{
