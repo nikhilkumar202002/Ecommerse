@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const { response } = require("express");
 const productModel = require("../Models/Addproductmodel")
 const getProduct = async (req,res)=>{
@@ -26,8 +27,17 @@ const addproduct = async (req,res)=>{
         console.log(error);
         
     }
+=======
+const addproduct = (req,res)=>{
+    console.log(req.body)
+    console.log(req.file)
+>>>>>>> e345bf993f1fbdefa97751d486b10eda1c829420
 }
 const test = (req,res)=>{
         console.log("Test working..")
 }
+<<<<<<< HEAD
 module.exports = { addproduct ,test, getProduct }
+=======
+module.exports = {  addproduct ,test }
+>>>>>>> e345bf993f1fbdefa97751d486b10eda1c829420
