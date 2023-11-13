@@ -1,9 +1,46 @@
-import React from 'react'
+import React, { useState, useEffect,useContext } from 'react'
+import { useNavigate } from 'react-router'
 import './HomeCards.css'
 import Product1 from '../Images/product 1.jpg'
-
-
+import Axios from '../Static/Axios'
+import { UserContext } from '../Static/UserContext'
+import { Navigate } from 'react-router'
 function HomeCards() {
+    const navigate = useNavigate();
+    const {user,setUser} = useContext(UserContext)
+    const [product, setproduct] = useState([])
+    useEffect(() => {
+                
+            try {
+                    Axios.get('/Admin/allproducts').then((response)=>{
+                            console.log(response)
+                            setproduct(response.data)
+                    })
+            } catch (error) {
+                
+            }
+    }, [])
+    
+    const addtoCart=(obj)=>{
+        console.log(obj)
+        console.log(user.user._id,"user")
+        let userId =   user.user._id
+        let data = {
+            obj,
+            userId
+        }
+        try {
+                Axios.post('/AddToCart',data).then((response)=>{
+                console.log(response.data)
+                  navigate('/cart');
+
+                })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
   return (
     <>
      <div className='homecardheading'>
@@ -12,221 +49,38 @@ function HomeCards() {
     <div className='homeCards'>
        
         <div className='homepageCards'>
-            <div className='homeCard'>
+            {
+               product.map((obj)=>{
+                return(
+                    <>
+                         <div className='homeCard'>
                 <div className='homeCardimage'>
                     <img src={Product1} alt="" />
                 </div>
                 <div className='homeCarddetails'>
                     <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
+                        <p><b>{obj ? obj.name : ""}</b></p>
                     </div>
                     <div className='productDetails'>
                         <p>Rating</p>
-                        <span><p>$300</p></span>
-                        <p className='offer'>$200</p>
+                        <span><p><s>{obj ? obj.price : ""} </s></p></span>
+                        <p className='offer'>{obj ? obj.offer_price : ""}</p>
                     </div>
-                   
-                
-                </div>
-            </div>
 
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
+                    <div className='homecard_btn'>
+                        <button type="submit" onClick={()=>addtoCart(obj)} >Add to Cart</button>
                     </div>
                    
                 
                 </div>
             </div>
+                    </>
+                )
+               }) 
+            }
+           
 
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
-                    </div>
-                   
-                
-                </div>
-            </div>
-
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
-                    </div>
-                   
-                
-                </div>
-            </div>
-
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
-                    </div>
-                   
-                
-                </div>
-            </div>
-
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
-                    </div>
-                   
-                
-                </div>
-            </div>
-
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
-                    </div>
-                   
-                
-                </div>
-            </div>
-
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
-                    </div>
-                   
-                
-                </div>
-            </div>
-
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
-                    </div>
-                   
-                
-                </div>
-            </div>
-
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
-                    </div>
-                   
-                
-                </div>
-            </div>
-
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
-                    </div>
-                   
-                
-                </div>
-            </div>
-
-            <div className='homeCard'>
-                <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
-                </div>
-                <div className='homeCarddetails'>
-                    <div className='pname'>
-                        <p><b>New Balance Men's 847 V4 Walking Shoe</b></p>
-                    </div>
-                    <div className='productDetails'>
-                        <p>Rating</p>
-                        <p>$300</p>
-                        <p className='offer'>$200</p>
-                    </div>
-                   
-                
-                </div>
-            </div>
+            
             
         </div>
     </div>

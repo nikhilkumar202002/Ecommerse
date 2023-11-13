@@ -45,6 +45,7 @@
     /* position: absolute; */
     padding-top: 200px;
     padding-left: 15px;
+    line-height: 10px;
 }
 .homeproductmore{
     text-align: center;
@@ -75,9 +76,23 @@
 
 }
 .productDetails .offer{
-    font-size: 20px;
+    font-size: 25px;
+    font-weight: 600;
 }
 .productDetails span{
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
+    color: red;
+}
+.homecard_btn button{
+    margin-bottom: -10px;
+    width: 150px;
+    height: 36px;
+    background-color: #FD7B2B;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-family: "Poppins";
 }

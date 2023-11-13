@@ -12,6 +12,7 @@ import ProfilePic from '../Images/elssie.jpg'
 
 function Navbar() {
     const {user,setUser} = useContext(UserContext)
+    console.log(user,"from nav")
     const logout = ()=>{
         localStorage.removeItem("Auth_info");
         setUser(null)
@@ -61,7 +62,7 @@ function Navbar() {
                 <div className='navCart'> 
                     {
                         user ? 
-                    <button><img src={cart} alt=""/><sup><div className='cart_counter'><p>1</p></div></sup></button>
+                    <button><img src={cart} alt=""/><sup><div className='cart_counter'><p>{user ? user.cartTotal : 0}</p></div></sup></button>
                         : 
                         ""
                     }
@@ -70,7 +71,7 @@ function Navbar() {
                     {
                         user ? 
 
-                                <button className='user_profile'><img src={ProfilePic} alt=""/>{user.UserName}</button>
+                                <button className='user_profile'><img src={ProfilePic} alt=""/>{user.user.UserName}</button>
                         :
                                 <button><img src={profile} alt="" /></button>
                     }

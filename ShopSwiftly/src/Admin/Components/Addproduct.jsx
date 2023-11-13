@@ -1,19 +1,13 @@
-<<<<<<< HEAD
+
 import React, { useRef, useState } from 'react'
 import './Addproduct.css'
 import Axios from '../../Static/Axios'
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 export default function Addproduct() {
-    
-    const [productStatus,setPoductStatus] = useState(false)
-=======
-import React, { useRef } from 'react'
-import './Addproduct.css'
-import Axios from '../../Static/Axios'
-export default function Addproduct() {
 
->>>>>>> e345bf993f1fbdefa97751d486b10eda1c829420
+    const [productStatus,setPoductStatus] = useState(false)
+
     const productRef = useRef(null);
     const priceRef = useRef(null);
     const offerpriceRef = useRef(null);
@@ -28,19 +22,19 @@ export default function Addproduct() {
         const OfferPrice = offerpriceRef.current.value;
         const Description = descriptionRef.current.value;
         const ProductImage = productimageRef.current.files[0];
-<<<<<<< HEAD
+
         console.log("ProductName: ", ProductName);
         console.log("Price: ", Price);
         console.log("OfferPrice: ", OfferPrice);
         console.log("Description: ", Description);
         console.log("ProductImage: ", ProductImage);
-=======
+
         console.log("Product Name: ", ProductName);
         console.log("Price: ", Price);
         console.log("Offer Price: ", OfferPrice);
         console.log("Description: ", Description);
         console.log("Product Image: ", ProductImage);
->>>>>>> e345bf993f1fbdefa97751d486b10eda1c829420
+
         const formData = new FormData();
                 formData.append('name', ProductName);
                 formData.append('price', Price);
@@ -52,7 +46,7 @@ export default function Addproduct() {
         try {
             Axios.post('/admin/add-product',formData).then((response)=>{
                 console.log(response.date);
-<<<<<<< HEAD
+
                 setPoductStatus(response.data);
                 if(response.data){
                     const myTimeout = setTimeout(changeStatus, 2000);
@@ -69,14 +63,14 @@ export default function Addproduct() {
                     productimageRef.current.value = ""
                 }
                 
-=======
->>>>>>> e345bf993f1fbdefa97751d486b10eda1c829420
+
             })
         } catch (error) {
             console.log(error)
         }
 
-        
+   
+    
 
     }
   return (

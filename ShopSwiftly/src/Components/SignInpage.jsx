@@ -27,13 +27,16 @@ function SignInpage() {
       }
       try {
           Axios.post('/userLogin',LoginData).then((response)=>{
-            console.log(response.data)
-            const userData = JSON.stringify(response.data)
-            localStorage.setItem('Auth_info',userData)
-            setUser(userData)
-            navigate('/');
-  
+            console.log(response.data,"response data")
+            if(response.data){
+                  const userData = JSON.stringify(response.data)
+                  localStorage.setItem('Auth_info',userData)
+                  console.log(userData,"userDta")
+                  setUser(userData)
 
+                  navigate('/');
+            }
+            
           })
       }catch(error){
         console.log(error)

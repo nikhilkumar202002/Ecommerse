@@ -17,11 +17,10 @@ app.use(cors());
 app.use(fileUpload())
 
 app.use(express.json());
-<<<<<<< HEAD
+
 app.use(express.static(path.join(__dirname, 'Public')));
-=======
 app.use(express.static(path.join(__dirname, 'public')));
->>>>>>> e345bf993f1fbdefa97751d486b10eda1c829420
+
 
 async function connection(){
     try {
