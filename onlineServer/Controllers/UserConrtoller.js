@@ -108,5 +108,49 @@ const getCartItem = async (req,res)=>{
                     console.log(error)
             }
     }
-
-module.exports = {HomepageData,userRegistration,userLogin,AddToCart,getCartItem}
+const removefromCart = async(req,res)=>{
+        try {
+            console.log(req.body)
+            const Product_Id = req.body.id
+            const user_id = req.body.user_Id
+            console.log(Product_Id, user_id)
+            let removedItem = await CartModel.findOneAndUpdate(
+                { userId:user_id},
+                {
+                    $pull: {
+                        product: {
+                           
+                            '_id': Product_Id
+                        }
+                    }
+                }
+            );
+            console.log(removedItem)
+            res.json(true)
+        } catch (error) {
+            console.log(error) 
+        }
+}
+const increment = async(req,res)=>{
+    let {user_Id} =req.body
+    let { id} = req.body
+    try {
+        let increments = await CartModel.findOneAndUpdate({userId:user_Id,'product._id': id},{
+            $inc:{ 'product.$.quantity' :1 },
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+const decrement = async(req,res)=>{
+    let {user_Id} =req.body
+    let { id} = req.body
+    try {
+        let increments = await CartModel.findOneAndUpdate({userId:user_Id,'product._id': id},{
+            $inc:{ 'product.$.quantity' :-1 },
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+module.exports = {HomepageData,userRegistration,userLogin,AddToCart,getCartItem,removefromCart,decrement,increment}

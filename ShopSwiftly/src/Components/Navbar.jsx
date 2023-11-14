@@ -62,7 +62,11 @@ function Navbar() {
                 <div className='navCart'> 
                     {
                         user ? 
-                    <button><img src={cart} alt=""/><sup><div className='cart_counter'><p>{user ? user.cartTotal : 0}</p></div></sup></button>
+                    <button>
+                        <Link to='/cart'>
+                             <img src={cart} alt=""/><sup><div className='cart_counter'><p>{user ? user.cartTotal : 0}</p></div></sup>
+                        </Link>
+                    </button>
                         : 
                         ""
                     }

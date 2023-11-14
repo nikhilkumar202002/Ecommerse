@@ -3,6 +3,8 @@ import Review_star from '../Icons/star.svg'
 import './Product_cards.css'
 import Axios from '../Static/Axios'
 import ProImage from '../Images/adidasnmdr1black.jpg'
+import {ImgUrl} from '../Static/ImagUrl'
+
 function Product_cards() {
     const [product, setproduct] = useState([])
     useEffect(() => {
@@ -30,7 +32,7 @@ function Product_cards() {
                         <>
             <div className='product_card'>
                 <div className='product_card_top'>
-                    <img src={ProImage} alt="" />
+                    <img src={  ImgUrl + '/' + obj._id+'.jpg'} alt="" />
                 </div>
 
                 <div className='product_card_details'>

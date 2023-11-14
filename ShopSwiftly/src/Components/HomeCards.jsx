@@ -1,10 +1,11 @@
 import React, { useState, useEffect,useContext } from 'react'
 import { useNavigate } from 'react-router'
 import './HomeCards.css'
-import Product1 from '../Images/product 1.jpg'
 import Axios from '../Static/Axios'
 import { UserContext } from '../Static/UserContext'
 import { Navigate } from 'react-router'
+import {ImgUrl} from '../Static/ImagUrl'
+
 function HomeCards() {
     const navigate = useNavigate();
     const {user,setUser} = useContext(UserContext)
@@ -55,7 +56,7 @@ function HomeCards() {
                     <>
                          <div className='homeCard'>
                 <div className='homeCardimage'>
-                    <img src={Product1} alt="" />
+                    <img src={  ImgUrl + '/' + obj._id+'.jpg'} alt="" />
                 </div>
                 <div className='homeCarddetails'>
                     <div className='pname'>

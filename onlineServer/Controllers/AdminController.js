@@ -11,11 +11,13 @@ const getProduct = async (req,res)=>{
 }
 const addproduct = async (req,res)=>{
     console.log(req.body)
-    console.log(req.files)
-    let {image} = req.files;
+    // console.log(req.files)
+    console.log("am here at add p")
+    const {image} = req.files;
+    console.log(image)
     try {
         let product = await productModel.create(req.body)
-        image.mv('./Public/Images/Products/' + product._id +".jpg").then((err)=>{
+       await image.mv('./Public/Images/Products/' + product._id +".jpg").then((err)=>{
             if(!err){
                 res.json(true)
             }else{
