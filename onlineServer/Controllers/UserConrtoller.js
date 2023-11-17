@@ -1,7 +1,7 @@
 const userModel = require('../Models/UserModel')
 const CartModel = require('../Models/CartModel')
 const bcrypt = require('bcryptjs'); 
-
+const Razorpay = require('../Payments/Razorpay')
 const HomepageData = (req,res)=>{
     let data={name:"anaz"}
     res.send(data);
@@ -11,7 +11,7 @@ const userRegistration = async (req,res)=>{
     try {
         const {Password}  =  req.body
         bcrypt.hash(Password,10,  async function(err,hash){
-            if(err){
+            if(err){    
                 console.log(err)
 
             }else{
@@ -153,4 +153,27 @@ const decrement = async(req,res)=>{
         console.log(error)
     }
 }
-module.exports = {HomepageData,userRegistration,userLogin,AddToCart,getCartItem,removefromCart,decrement,increment}
+const orderCtreate =(req,res)=>{
+     console.log(req.body);
+    try {
+        const options = {
+            amount: req.body.amount , // amount == Rs 10
+            currency: "INR",
+            receipt: req.body.userId,
+            payment_capture: 0,
+       // 1 for automatic capture // 0 for manual capture
+          };
+          Razorpay.orders.create(options, async function (err, order) {
+            if (err) {
+             console.log(err)
+            }else{
+                console.log(order)
+                res.json(order)
+            }
+          
+         });
+    } catch (error) {
+        console.log(error)
+    }
+}
+module.exports = {HomepageData,userRegistration,userLogin,AddToCart,getCartItem,removefromCart,decrement,increment,orderCtreate}

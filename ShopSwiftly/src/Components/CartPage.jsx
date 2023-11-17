@@ -5,12 +5,20 @@ import Axios from '../Static/Axios'
 import { UserContext } from '../Static/UserContext'
 import { json } from 'react-router'
 import {ImgUrl} from '../Static/ImagUrl'
+import RenderRazorpay from './RenderRazorpay'
 
 function CartPage() {
     
         const {user,setUser} = useContext(UserContext)
         const [cartItems, setCartitems] = useState([])
         const [total,setTotal] =useState("")
+        const [displayRazorpay, setDisplayRazorpay] = useState(false);
+
+        const [orderDetails, setOrderDetails] = useState({
+            orderId: null,
+            currency: null,
+            amount: null,
+           });
         const totalAmt = ()=>{
             
         }
@@ -99,6 +107,35 @@ function CartPage() {
                     console.log(error)
             }
         }
+        const checkOut = async()=>{
+            let  userId = user.user._id;
+            let Data  = {
+                total,
+                userId
+            }
+            try {
+                
+                    const {data} = await Axios.post('/CreateOrder',
+                     {
+                        amount: total*100, //convert amount into lowest unit. here, Dollar->Cents
+                      keyId:"rzp_test_ZQzRHblUiM9SYF",
+                      KeySecret: "Ba9TrQ7sz2SkoeWwliVfhP3R",
+                     }
+                    );
+                    console.log(data,"data")
+                    if(data){
+                        setOrderDetails({
+                          orderId: data.order_id,
+                          currency: data.currency,
+                          amount: data.amount/100,
+                        });
+                        setDisplayRazorpay(true); 
+                    }
+                   
+            } catch (error) {
+                    console.log(error)
+            }
+        }
   return (
     <>
             <div className='cart_heading'>'
@@ -164,9 +201,20 @@ function CartPage() {
 
                     </div>
                     <div className='cart_checkout_btn'>
-                            <button>Checkout</button>
+                            <button onClick={()=>checkOut()}>Checkout</button>
                         </div>
                 </div>
+                {
+                    displayRazorpay && (
+                            <RenderRazorpay
+                                 amount={orderDetails.amount}
+                                 currency={orderDetails.currency}
+                                 orderId={orderDetails.orderId}
+                                 keyId="rzp_test_ZQzRHblUiM9SYF"
+                                keySecret="Ba9TrQ7sz2SkoeWwliVfhP3R"
+                            />
+                    )
+                }
             </section>
     </>
   )
