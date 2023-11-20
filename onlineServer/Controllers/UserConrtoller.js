@@ -64,7 +64,7 @@ const AddToCart = async(req,res)=>{
        let userId = req.body.userId; 
        let cart=await CartModel.findOne({userId:userId});
        console.log(cart)
-                if(!cart){
+                if(!cart || cart.orderDetails != null){
                         console.log("i am here")
                         obj.quantity = 1;
                         let cartObject = {
@@ -102,7 +102,7 @@ const getCartItem = async (req,res)=>{
                 console.log("at get cart")
                 console.log(req.body)
                 const userId = req.body._id;  
-                 let userCart = await CartModel.findOne({userId:userId});
+                 let userCart = await CartModel.findOne({userId:userId,orderDetails :null});
                  res.json(userCart)   
             } catch (error) {
                     console.log(error)
@@ -176,4 +176,32 @@ const orderCtreate =(req,res)=>{
         console.log(error)
     }
 }
-module.exports = {HomepageData,userRegistration,userLogin,AddToCart,getCartItem,removefromCart,decrement,increment,orderCtreate}
+
+const orderPayment = async (req,res)=>{
+    let userid = req.body.user.user._id;
+    let { orderDetails} = req.body;
+    console.log(orderDetails,userid,"first")
+    console.log(req.body);
+    try {
+        await CartModel.findOneAndUpdate({userId:userid},{
+            $set :{orderDetails :orderDetails}
+        })
+        console.log("cart updated")
+    } catch (error) {
+        
+    }
+
+}
+
+const myOrders = async (req,res) =>{
+    console.log(req.body,"HELLO") 
+    let {_id} = req.body;  
+    try {
+        let myOrdersData = await CartModel.findOne({ userId: _id, orderDetails: { $ne: null } });
+            console.log(myOrdersData)
+            res.json(myOrdersData)
+    } catch (error) {
+        
+    }
+}
+module.exports = {HomepageData,userRegistration,userLogin,AddToCart,getCartItem,removefromCart,decrement,increment,orderCtreate,orderPayment,myOrders}

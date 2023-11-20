@@ -1,6 +1,5 @@
 import React, { useEffect ,useContext, useState} from 'react'
 import './CartPage.css'
-import Product1 from '../Images/product 1.jpg'
 import Axios from '../Static/Axios'
 import { UserContext } from '../Static/UserContext'
 import { json } from 'react-router'
@@ -58,14 +57,18 @@ function CartPage() {
                                         console.log(userData,"Userid from cart from auth info")
                                             Axios.post('/getCartItem',userData).then((response)=>{
                                             console.log(response.data,"cartData")
-                                            setCartitems(response.data.product)
-                                            let payment = 0;
-                                            response.data.product.map((item)=>{
-                                                            console.log(item.offer_price)
-                                                            payment = payment + (parseInt(item.offer_price) * parseInt(item.quantity));
-                                                        }) 
-                                    console.log(payment,"payment");
-                                    setTotal(payment)
+                                                if(response.data){
+                                                    setCartitems(response.data.product)
+                                                    let payment = 0;
+                                                    response.data.product.map((item)=>{
+                                                                    console.log(item.offer_price)
+                                                                    payment = payment + (parseInt(item.offer_price) * parseInt(item.quantity));
+                                                                }) 
+                                                            console.log(payment,"payment");
+                                                            setTotal(payment)
+                                                }
+                                           
+                                           
                                             
                                     })
                                     totalAmt(); 
@@ -79,7 +82,7 @@ function CartPage() {
             let product = {
                     id,
                     user_Id
-            }
+            }   
             try {
                 Axios.post('/increment',product).then((response)=>{
                         console.log(response.data)
@@ -125,7 +128,7 @@ function CartPage() {
                     console.log(data,"data")
                     if(data){
                         setOrderDetails({
-                          orderId: data.order_id,
+                          orderId: data.id,
                           currency: data.currency,
                           amount: data.amount/100,
                         });
@@ -145,6 +148,7 @@ function CartPage() {
             <section className='cart_hero'>
                 <div className='cart_item'>
                     {
+                        cartItems ?
                             cartItems.map((item)=>{
                                     return (
                                         <>
@@ -167,12 +171,10 @@ function CartPage() {
                                         </div>
                                         </>
                                     )
-                            })
+                            }) :
+                            <h1>Cart Empty!</h1>
 
                     }
-
-
-               
 
                 </div>
                 <div className='cart_total'>

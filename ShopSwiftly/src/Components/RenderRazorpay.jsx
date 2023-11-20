@@ -1,6 +1,9 @@
-import { useEffect, useRef } from 'react';
-import Axios from 'axios';
+import { useEffect, useRef,useContext } from 'react';
+import Axios from '../Static/Axios';
 import cryptojs from 'crypto-js'
+import { UserContext } from '../Static/UserContext'
+
+
 const RenderRazorpay = ({
   orderId,
   keyId,
@@ -9,6 +12,8 @@ const RenderRazorpay = ({
   amount,
   serverBaseUrl, // You should define serverBaseUrl
 }) => {
+  const {user,setUser} = useContext(UserContext)
+
   const paymentId = useRef(null);
   const paymentMethod = useRef(null);
 
@@ -49,9 +54,10 @@ const RenderRazorpay = ({
 
   const handlePayment = async (status, orderDetails = {}) => {
     try {
-      await Axios.post(`${serverBaseUrl}/payment`, {
+      await Axios.post('/payment', {
         status,
         orderDetails,
+        user
       });
     } catch (error) {
       console.error('Error handling payment:', error);
@@ -68,12 +74,12 @@ const RenderRazorpay = ({
       order_id: orderId,
       handler: (response) => {
         console.log('succeeded');
-        console.log(response);
+        console.log(response,"hello");
         paymentId.current = response.razorpay_payment_id;
-  
+        console.log(orderId,"orderid")
         // Most important step to capture and authorize the payment. This can be done of Backend server.
         const succeeded = cryptojs.HmacSHA256(`${orderId}|${response.razorpay_payment_id}`, keySecret).toString() === response.razorpay_signature;
-  
+        console.log(succeeded,"hi")
         // If successfully authorized. Then we can consider the payment as successful.
         if (succeeded) {
           handlePayment('succeeded', {

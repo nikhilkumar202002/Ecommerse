@@ -9,8 +9,10 @@ const CartSchema =  new Schema({
     userId : {
         type : String,
         require : true,
-
     },
+    orderDetails:{
+        type:Object
+    }
    
 })
 
