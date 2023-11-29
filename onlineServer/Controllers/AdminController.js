@@ -1,6 +1,8 @@
 
 const { response } = require("express");
 const productModel = require("../Models/Addproductmodel")
+const CartModel = require('../Models/CartModel');
+const UserModel = require("../Models/UserModel");
 const getProduct = async (req,res)=>{
     try {
        let products = await productModel.find()
@@ -34,6 +36,35 @@ const addproduct = async (req,res)=>{
 const test = (req,res)=>{
         console.log("Test working..")
 }
-
-module.exports = {addproduct ,test, getProduct}
+const getOrders = async(req,res)=>{
+        console.log('hello im here')
+    try {
+        const orders = await CartModel.find({ 
+            orderDetails
+            : { $exists: true, $ne: null } })
+        console.log(orders,"hello")
+        res.json(orders);
+    } catch (error) {
+        console.log(error)
+    }
+}
+const GetUser = async (req,res)=>{
+        try {
+                console.log(req.body,"user Detils")
+                let {userData} = req.body;
+            let userDatas  =  await UserModel.find({_id:userData})
+            console.log(userDatas,"userData")
+            res.json(userDatas)
+        } catch (error) {
+            console.log(error) 
+        }
+}
+module.exports = 
+{
+addproduct,
+test,
+getProduct,
+getOrders,
+GetUser
+}
 

@@ -64,8 +64,8 @@ const AddToCart = async(req,res)=>{
        let userId = req.body.userId; 
        let cart=await CartModel.findOne({userId:userId});
        console.log(cart)
-                if(!cart || cart.orderDetails != null){
-                        console.log("i am here")
+                if(!cart || (cart && cart.orderDetails!=null)){
+                        console.log("i am here cart.Orderdetails is here")
                         obj.quantity = 1;
                         let cartObject = {
                             userId,
@@ -74,19 +74,21 @@ const AddToCart = async(req,res)=>{
                         let Newcart = await CartModel.create(cartObject)
                         console.log(Newcart.product,"----new")
                 }else{
-                    console.log("else part")
-                        console.log(cart.product,"product id")
-                           let cartExisit = cart.product.findIndex((product)=>product._id == obj._id)
-                           console.log(cartExisit)
-                           if(cartExisit == -1){
-                                obj.quantity = 1;
-                                    await CartModel.findOneAndUpdate({userId:userId},
-                                            {
-                                                $push: {
-                                                         product : obj
-                                                        }
-                                            }
-                                        )     
+                           
+                            console.log("else part")
+                                console.log(cart.product,"product id")
+                                let cartExisit = cart.product.findIndex((product)=>product._id == obj._id)
+                                console.log(cartExisit,"product")
+                                if(cartExisit == -1){
+                                        obj.quantity = 1;
+                                            await CartModel.findOneAndUpdate({userId:userId},
+                                                    {
+                                                        $push: {
+                                                                product : obj
+                                                                }
+                                                    }
+                                                )  
+                                           
                            }else{
                                      res.json("Already Exsit")
                            }
@@ -197,11 +199,27 @@ const myOrders = async (req,res) =>{
     console.log(req.body,"HELLO") 
     let {_id} = req.body;  
     try {
-        let myOrdersData = await CartModel.findOne({ userId: _id, orderDetails: { $ne: null } });
+        let myOrdersData = await CartModel.findOne({ userId: _id, orderDetails: { $ne: null} });
             console.log(myOrdersData)
             res.json(myOrdersData)
     } catch (error) {
         
     }
 }
-module.exports = {HomepageData,userRegistration,userLogin,AddToCart,getCartItem,removefromCart,decrement,increment,orderCtreate,orderPayment,myOrders}
+
+
+module.exports = 
+{
+HomepageData,
+userRegistration,
+userLogin,
+AddToCart,
+getCartItem,
+removefromCart,
+decrement,
+increment,
+orderCtreate,
+orderPayment,
+myOrders,
+
+}

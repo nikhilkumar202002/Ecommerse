@@ -11,7 +11,8 @@ const CartSchema =  new Schema({
         require : true,
     },
     orderDetails:{
-        type:Object
+        type:Object,
+        default:null
     }
    
 })

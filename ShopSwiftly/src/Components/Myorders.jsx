@@ -3,6 +3,8 @@ import './Myorders.css'
 import Product1 from'../Images/product 1.jpg'
 import Axios from '../Static/Axios'
 import { UserContext } from '../Static/UserContext'
+import {ImgUrl} from '../Static/ImagUrl'
+
 
 
 function Myorders() {
@@ -40,7 +42,7 @@ function Myorders() {
                        <div className='myorders_main_cards'>
                             <div className='myorders_card'>
                               <div className='myorder_card_left'>
-                                <img src={Product1} alt=""/>
+                                <img src={  ImgUrl + '/' + product._id+'.jpg'} alt=""/>
                               </div>
                               <div className='myorder_card_right'>
                                   <p><b>{product.name}</b></p>

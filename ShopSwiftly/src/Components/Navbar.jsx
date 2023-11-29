@@ -10,6 +10,7 @@ import ProfilePic from '../Images/elssie.jpg'
 
 
 
+
 function Navbar() {
     const {user,setUser} = useContext(UserContext)
     console.log(user,"from nav")

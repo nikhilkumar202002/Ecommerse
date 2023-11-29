@@ -15,12 +15,51 @@
     padding: 20px;
     margin-left: 20px;
 }
+.order_list img{
+    width: 50px;
+}
 .order_list th,td{
-    padding: 15px 60px 15px;
+    padding: 15px 40px 15px;
     border-bottom: 1px solid rgb(200, 200, 200);
     font-family: "Poppins";
 }
 .order_list button{
     padding: 10px;
     font-family: "Poppins";
+}
+.modal_container{
+    width: 30%;
+    padding: 30px;
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400;
+  background-color: white;
+  box-shadow: 24;
+  padding: 4;
+}
+#modal-modal-title{
+    font-size: 30px;
+    font-family: "Poppins";
+    font-weight: 500;
+    color: rgb(133, 133, 255);;
+}
+.modal_content{
+    font-size: 20px;
+    font-family: "Poppins";
+}
+.modal_content button{
+    padding: 12px 18px 12px;
+    font-size: 15px;
+    background-color: rgb(133, 133, 255);
+    border: none;
+    outline: none;
+    color: white;
+}
+.modal_btn{
+    display: flex;
+}
+.modal_btns{
+    padding: 4px;
 }
