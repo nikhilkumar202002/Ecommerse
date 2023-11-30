@@ -13,7 +13,13 @@ const CartSchema =  new Schema({
     orderDetails:{
         type:Object,
         default:null
+    },
+    shippingStatus : {
+        type : String,
+        default : null
     }
+
+
    
 })
 

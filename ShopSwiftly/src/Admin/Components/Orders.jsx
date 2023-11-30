@@ -58,6 +58,23 @@ function Orders() {
       }
           
  }, [])
+
+ const updateStatus = (value) =>{
+      console.log(value);
+      let cartId = orders._id;
+      let status = {
+        value,
+        cartId
+      }
+
+      try {
+        Axios.post('/admin/shippingStatus',status).then((response)=>{
+            console.log(response.data)
+        })
+      } catch (error) {
+          console.log(error)
+      }
+ }
  
   return (
     <>
@@ -102,10 +119,10 @@ function Orders() {
               <p>Email : {userDetails.Email}</p>
               <p>Address : </p>
               <div className='modal_btn'>
-                <div className='modal_btns'><button>Shipped</button></div>
-                <div className='modal_btns'><button>PickUp</button></div>
-                <div className='modal_btns'><button>Out of Delivery</button></div>
-                <div className='modal_btns'><button>Delivered</button></div>
+                <div className='modal_btns'><button onClick={() =>updateStatus("Shipped")}>Shipped</button></div>
+                <div className='modal_btns'><button onClick={() =>updateStatus("Pickuped")}>PickUp</button></div>
+                <div className='modal_btns'><button onClick={() =>updateStatus("Out of Delivery")}>Out of Delivery</button></div>
+                <div className='modal_btns'><button onClick={() =>updateStatus("Delivered")}>Delivered</button></div>
               </div>
             </div>
           </Typography>

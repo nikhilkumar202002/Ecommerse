@@ -59,12 +59,28 @@ const GetUser = async (req,res)=>{
             console.log(error) 
         }
 }
+
+const shippingStatus = async(req,res)=>{
+            console.log(req.body);
+            let {cartId ,value} = req.body;
+            try {
+                let updation = await CartModel.findByIdAndUpdate({_id:cartId},{$set:{shippingStatus:value}})
+                if(updation){
+                    console.log(updation);
+                    res.json(true);
+                }
+            } catch (error) {
+                console.log(error)
+                res.json(false)
+            }
+}
 module.exports = 
 {
 addproduct,
 test,
 getProduct,
 getOrders,
-GetUser
+GetUser,
+shippingStatus
 }
 
