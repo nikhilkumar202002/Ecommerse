@@ -49,11 +49,25 @@
 }
 .track-order{
     display: flex;
+    align-items: center;
     text-align: center;
-    justify-content: space-around;
 }
 .track-order-list{
     color: black;
     font-family: "Poppins";
     font-weight: 500;
+    padding-left: 30px;
+}
+.progressline{
+    width: 150px;
+    height: 3px;
+    border-radius: 10px;
+    background-color: #5cb85c;
+
+}
+.progressline-circle{
+    width: 25px;
+    height: 25px;
+    border-radius: 20px;
+    border: 1px solid #5cb85c;
 }

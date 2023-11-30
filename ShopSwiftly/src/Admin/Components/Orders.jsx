@@ -60,7 +60,7 @@ function Orders() {
  }, [])
 
  const updateStatus = (value) =>{
-      console.log(value);
+      console.log(value,"value");
       let cartId = orders._id;
       let status = {
         value,
@@ -119,10 +119,10 @@ function Orders() {
               <p>Email : {userDetails.Email}</p>
               <p>Address : </p>
               <div className='modal_btn'>
-                <div className='modal_btns'><button onClick={() =>updateStatus("Shipped")}>Shipped</button></div>
-                <div className='modal_btns'><button onClick={() =>updateStatus("Pickuped")}>PickUp</button></div>
-                <div className='modal_btns'><button onClick={() =>updateStatus("Out of Delivery")}>Out of Delivery</button></div>
-                <div className='modal_btns'><button onClick={() =>updateStatus("Delivered")}>Delivered</button></div>
+                <div className='modal_btns'><button onClick={() =>updateStatus(1)}>Shipped</button></div>
+                <div className='modal_btns'><button onClick={() =>updateStatus(2)}>PickUp</button></div>
+                <div className='modal_btns'><button onClick={() =>updateStatus(3)}>Out of Delivery</button></div>
+                <div className='modal_btns'><button onClick={() =>updateStatus(4)}>Delivered</button></div>
               </div>
             </div>
           </Typography>
