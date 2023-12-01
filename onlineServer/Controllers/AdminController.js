@@ -61,7 +61,7 @@ const GetUser = async (req,res)=>{
 }
 
 const shippingStatus = async(req,res)=>{
-            console.log(req.body);
+            console.log(req.body,"req.body----shipping ststus");
             let {cartId ,value} = req.body;
             try {
                 let updation = await CartModel.findByIdAndUpdate({_id:cartId},{$set:{shippingStatus:value}})

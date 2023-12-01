@@ -22,8 +22,8 @@ function Orders() {
     fontSize:"12px"
   }
  
-  const handleOpen = () => {
-        let userId= userData;
+  const handleOpen = (userID) => {
+        let userData= userID;
         console.log(userData,"userData")
         let user ={
           userData
@@ -49,7 +49,8 @@ function Orders() {
           
           console.log(response.data[0].userId,"cart products")
           setUserData(response.data[0].userId)
-          setOrders(response.data[0])
+          console.log(response.data,"response.data")
+          setOrders(response.data)
           setProduct(response.data[0].product)
         })
  
@@ -59,9 +60,9 @@ function Orders() {
           
  }, [])
 
- const updateStatus = (value) =>{
+ const updateStatus = (value,cartID) =>{
       console.log(value,"value");
-      let cartId = orders._id;
+      let cartId =cartID;
       let status = {
         value,
         cartId
@@ -97,44 +98,73 @@ function Orders() {
                  
                     
                          {
-                          Product.map((Product)=>
-                          <tr key={Product.offer_price}>
-                          <td> <img src={  ImgUrl + '/' + Product._id+'.jpg'} alt=""/></td>
-                            <td>{Product.name}</td>
-                            <td>{Product.Category}</td>
-                            <td><button onClick={handleOpen} style={viewOrderstyle}>View Order</button>
-                            <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box className="modal_container">
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Order Details
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <div className='modal_content'>
-              <p>Username : { userDetails ? userDetails.UserName : ""}</p>
-              <p>Email : {userDetails.Email}</p>
-              <p>Address : </p>
-              <div className='modal_btn'>
-                <div className='modal_btns'><button onClick={() =>updateStatus(1)}>Shipped</button></div>
-                <div className='modal_btns'><button onClick={() =>updateStatus(2)}>PickUp</button></div>
-                <div className='modal_btns'><button onClick={() =>updateStatus(3)}>Out of Delivery</button></div>
-                <div className='modal_btns'><button onClick={() =>updateStatus(4)}>Delivered</button></div>
-              </div>
-            </div>
-          </Typography>
-        </Box>
-      </Modal>
-                            </td>
-                            <td><button>Confrim</button><button>Cancel</button></td>
-                            
-                        </tr>
-                          )
-                          
-                  
+
+                              orders.map((order) => {
+
+                                return order.product.map((Product) => (
+                                  <tr key={Product.offer_price}>
+                                    <td><img src={ImgUrl + '/' + Product._id+'.jpg'} alt="" /></td>
+                                    <td>{Product.name}</td>
+                                    <td>{Product.Category}</td>
+                                    <td>
+                                      <button onClick={()=>handleOpen(order.userId)} style={viewOrderstyle}>
+                                        View Order
+                                      </button>
+                                      <Modal
+                                        open={open}
+                                        onClose={handleClose}
+                                        aria-labelledby="modal-modal-title"
+                                        aria-describedby="modal-modal-description"
+                                      >
+                                        <Box className="modal_container">
+                                          <Typography id="modal-modal-title" variant="h6" component="h2">
+                                            Order Details
+                                          </Typography>
+                                          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                            <div className="modal_content">
+                                              <p>Username: {userDetails ? userDetails.UserName : ''}</p>
+                                              <p>Email: {userDetails.Email}</p>
+                                              <p>Address: </p>
+                                              <div className="modal_btn">
+                                                <div className="modal_btns">
+                                                  <button onClick={() => updateStatus(1,order._id)}>Shipped</button>
+                                                </div>
+                                                <div className="modal_btns">
+                                                  <button onClick={() => updateStatus(2,order._id)}>PickUp</button>
+                                                </div>
+                                                <div className="modal_btns">
+                                                  <button onClick={() => updateStatus(3,order._id)}>Out of Delivery</button>
+                                                </div>
+                                                <div className="modal_btns">
+                                                  <button onClick={() => updateStatus(4,order._id)}>Delivered</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </Typography>
+                                        </Box>
+                                      </Modal>
+                                    </td>
+                                    <td>  
+                                      <div className='table-btn'>
+                                      <button onClick={updateStatus(1,order._id)} style={{backgroundColor:"#29bf12",
+                                                      border:"none",
+                                                      outline:"none",
+                                                      color:"white"
+                                    
+                                    }}>Confirm</button>
+                                      <button style={{backgroundColor:"#e01e37",
+                                                      border:"none",
+                                                      outline:"none",
+                                                      color:"white",
+                                                      marginLeft:"10px"  
+                                    }}>Cancel</button>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                ));
+
+                              })
+                                                        
                          }
                    
                        
