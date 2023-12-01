@@ -71,3 +71,18 @@
     border-radius: 20px;
     border: 1px solid #5cb85c;
 }
+.close-model{
+    margin-top: 30px;
+    float: right;
+}
+.close-model button{
+    padding: 8px 50px 8px;
+    background-color: #FD7B2B;
+    border-radius: 10px;
+    color: white;
+    border: none;
+    outline: none;
+    font-size: 17px;
+    font-family: "Poppins";
+    cursor: pointer;
+}

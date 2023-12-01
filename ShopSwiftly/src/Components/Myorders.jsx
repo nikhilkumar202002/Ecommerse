@@ -11,6 +11,11 @@ import Modal from '@mui/material/Modal';
 
 function Myorders() {
 
+
+  const [closeModal, setcloseModal] = useState(false)
+
+  
+
   const statusStyle = {
     position: 'absolute',
     top: '50%',
@@ -78,7 +83,7 @@ function Myorders() {
                           aria-describedby="modal-modal-description">
                           <Box sx={statusStyle}>
                             <Typography id="modal-modal-title order-status" variant="h6" component="h2" style={{fontSize:'25px',color:'black',fontFamily:'Poppins',fontWeight:'700'}}>
-                              Text in a modal
+                              Order Status
                             </Typography>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                               <div className='track-order'>
@@ -108,11 +113,12 @@ function Myorders() {
 
                                 
                                 </div>
-                                <div className='progressline' style={{ color: shipMentStatus >= 2 ? '#5cb85c' : 'black' }}></div>
-                                <div className='progressline-circle'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill={
-                                  shipMentStatus>=2 ? "#5cb85c" : "black" 
-                                } style={{marginTop:"5px"}} class="bi bi-check2" viewBox="0 0 16 16">
+                               
+                              
+                               
+                                <div className='progressline' style={{ backgroundColor: shipMentStatus >= 3 ? '#5cb85c' : 'black' }}></div>
+                                <div className='progressline-circle' style={{ border: shipMentStatus >= 3 ? '1px solid #5cb85c' : ' 1px solid black' }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="#5cb85c" style={{marginTop:"5px"}} class="bi bi-check2" viewBox="0 0 16 16">
                                         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                                 </svg>
                                 </div>
@@ -127,11 +133,11 @@ function Myorders() {
                                 <p style={{ color: shipMentStatus >= 3  ? '#5cb85c' : 'black' ,lineHeight:"20px "}}>Out <br /> of Delivery</p>
 
                                 </div>
-                                <div className='progressline' style={{ color: shipMentStatus >= 2 ? '#5cb85c' : 'black' }}></div>
-                                <div className='progressline-circle'>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill={
-                                  shipMentStatus>=2 ? "#5cb85c" : "black" 
-                                } style={{marginTop:"5px"}} class="bi bi-check2" viewBox="0 0 16 16">
+
+
+                                <div className='progressline' style={{ backgroundColor: shipMentStatus >= 4 ? '#5cb85c' : 'black' }}></div>
+                            <div className='progressline-circle' style={{ border: shipMentStatus >= 4 ? '1px solid #5cb85c' : ' 1px solid black' }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill={ shipMentStatus >= 4 ? "#5cb85c" : "black"} style={{marginTop:"5px"}} class="bi bi-check2" viewBox="0 0 16 16">
                                         <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                                 </svg>
                                 </div>
@@ -143,6 +149,10 @@ function Myorders() {
                                 <p style={{ color: shipMentStatus >=4? '#5cb85c' : 'black' }}>Delivered</p>
 
                                 </div>
+                              </div>
+
+                              <div className='close-model'>
+                                <button>Close</button>
                               </div>
                             </Typography>
                           </Box>
