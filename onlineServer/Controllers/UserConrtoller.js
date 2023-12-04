@@ -57,47 +57,103 @@ const userLogin = async (req,res)=>{
             console.log(error)
         }
 }
-const AddToCart = async(req,res)=>{
-    try {
-       console.log(req.body.obj)
-       let {obj} = req.body
-       let userId = req.body.userId; 
-       let cart=await CartModel.findOne({userId:userId});
-       console.log(cart)
-                if(!cart || (cart && cart.orderDetails!=null)){
-                        console.log("i am here cart.Orderdetails is here")
-                        obj.quantity = 1;
-                        let cartObject = {
-                            userId,
-                            product : [obj]
-                        };
-                        let Newcart = await CartModel.create(cartObject)
-                        console.log(Newcart.product,"----new")
-                }else{
+// const AddToCart = async(req,res)=>{
+//     try {
+//        console.log(req.body.obj)
+//        let {obj} = req.body
+//        let userId = req.body.userId; 
+//        let cart=await CartModel.findOne({userId:userId});
+//        console.log(cart)
+//                 if(!cart || (cart && cart.orderDetails!=null)){
+//                         console.log("i am here cart.Orderdetails is here")
+//                         obj.quantity = 1;
+//                         let cartObject = {
+//                             userId,
+//                             product : [obj]
+//                         };
+//                         let Newcart = await CartModel.create(cartObject)
+//                         console.log(Newcart.product,"----new")
+//                 }else{
                            
-                            console.log("else part")
-                                console.log(cart.product,"product id")
-                                let cartExisit = cart.product.findIndex((product)=>product._id == obj._id)
-                                console.log(cartExisit,"product")
-                                if(cartExisit == -1){
-                                        obj.quantity = 1;
-                                            await CartModel.findOneAndUpdate({userId:userId},
-                                                    {
-                                                        $push: {
-                                                                product : obj
-                                                                }
-                                                    }
-                                                )  
+//                             console.log("else part")
+//                                 console.log(cart.product,"product id")
+//                                 let cartExisit = cart.product.findIndex((product)=>product._id == obj._id)
+//                                 console.log(cartExisit,"product")
+//                                 if(cartExisit == -1){
+//                                         obj.quantity = 1;
+//                                             await CartModel.findOneAndUpdate({userId:userId},
+//                                                     {
+//                                                         $push: {
+//                                                                 product : obj
+//                                                                 }
+//                                                     }
+//                                                 )  
                                            
-                           }else{
-                                     res.json("Already Exsit")
-                           }
-                }
-       res.json("cart got")
-    } catch (error) {
+//                            }else{
+//                                      res.json("Already Exsit")
+//                            }
+//                 }
+//        res.json("cart got")
+//     } catch (error) {
         
+//     }
+// }
+
+const AddToCart = async (req, res) => {
+    try {
+        console.log(req.body.obj);
+        let { obj } = req.body;
+        let userId = req.body.userId;
+        let cart = await CartModel.findOne({ userId: userId });
+        console.log(cart);
+
+        if (!cart || (cart && cart.orderDetails != null)) {
+            console.log("Creating a new cart or orderDetails is null");
+            obj.quantity = 1;
+            let cartObject = {
+                userId,
+                product: [obj]
+            };
+            let newCart = await CartModel.create(cartObject);
+            console.log(newCart.product, "----new");
+        } else {
+            console.log("Cart exists and orderDetails is null");
+            console.log(cart.product, "product id");
+            let cartExist = cart.product.findIndex((product) => product._id == obj._id);
+            console.log(cartExist, "product");
+
+            if (cartExist === -1) {
+                console.log("Product does not exist in the cart. Adding it...");
+                obj.quantity = 1;
+                await CartModel.findOneAndUpdate(
+                    { userId: userId },
+                    {
+                        $push: {
+                            product: obj
+                        }
+                    }
+                );
+            } else {
+                console.log("Product already exists in the cart. Updating quantity...");
+                // Update the quantity of the existing product in the cart
+                // For example, increment the quantity by 1
+                await CartModel.findOneAndUpdate(
+                    { userId: userId, "product._id": obj._id },
+                    {
+                        $inc: {
+                            "product.$.quantity": 1
+                        }
+                    }
+                );
+            }
+        }
+        res.json("Cart updated successfully");
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
     }
-}
+};
+
 
 const getCartItem = async (req,res)=>{
         try {   

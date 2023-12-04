@@ -2,7 +2,7 @@ import { useEffect, useRef,useContext } from 'react';
 import Axios from '../Static/Axios';
 import cryptojs from 'crypto-js'
 import { UserContext } from '../Static/UserContext'
-
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
 const RenderRazorpay = ({
   orderId,
@@ -12,6 +12,7 @@ const RenderRazorpay = ({
   amount,
   serverBaseUrl, // You should define serverBaseUrl
 }) => {
+  const navigate = useNavigate();
   const {user,setUser} = useContext(UserContext)
 
   const paymentId = useRef(null);
@@ -59,6 +60,7 @@ const RenderRazorpay = ({
         orderDetails,
         user
       });
+      navigate('/')
     } catch (error) {
       console.error('Error handling payment:', error);
     }
