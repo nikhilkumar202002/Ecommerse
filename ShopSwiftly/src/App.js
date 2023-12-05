@@ -15,7 +15,7 @@ import Addcategory from './Admin/Pages/Addcategory';
 import Adminod from './Admin/Pages/Orders'
 import { UserContext } from './Static/UserContext';
 import AdminSignIn from './Admin/Pages/Adminsignin'
-
+import AdminCust from './Admin/Pages/Customers';
 
 function App() {
       const [user, setUser] = useState(null);
@@ -50,7 +50,7 @@ function App() {
     <Route path='adminaddcat' element={<Addcategory/>}/>
     <Route path='adminorder' element={<Adminod/>}/>
     <Route path='adminsignin' element={<AdminSignIn/>}/>
-
+    <Route path='admincustomerview' element={<AdminCust/>}/>
 
  </Routes>
 </UserContext.Provider>

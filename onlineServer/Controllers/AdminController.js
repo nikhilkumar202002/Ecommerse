@@ -74,6 +74,37 @@ const shippingStatus = async(req,res)=>{
                 res.json(false)
             }
 }
+
+const getCustomer = async(req,res)=>{
+    
+    try {
+        const customer = await UserModel.find();
+            res.json(customer);
+    } catch (error) {
+        console.log(error);
+    }
+    
+}
+
+const getCounts = async(req,res)=>{
+    try {
+        let productCount = await productModel.countDocuments({})
+        let custCount = await UserModel.countDocuments({})
+        let orders = await CartModel.find({ shippingStatus: { $ne: null } }).exec();
+        let deliveredProductCount = await productModel.countDocuments({ shippingStatus: '4' });
+
+
+        let count = {
+            productCount,
+            custCount,
+            orders,
+            deliveredProductCount
+        }
+        res.json(count)
+    } catch (error) {
+        console.log(error)
+    }
+}
 module.exports = 
 {
 addproduct,
@@ -81,6 +112,8 @@ test,
 getProduct,
 getOrders,
 GetUser,
-shippingStatus
+shippingStatus,
+getCustomer,
+getCounts
 }
 

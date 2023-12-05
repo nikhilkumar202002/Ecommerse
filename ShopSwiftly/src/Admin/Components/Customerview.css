@@ -1,0 +1,16 @@
+.admin-cust-view-heading h1{
+    font-size: 30px;
+    font-weight: "Poppins";
+    color: rgb(133, 133, 255);
+}
+.admin-cust-view-heading{
+    padding-left: 30px;
+}
+.admin-cust-view-table{
+    padding-left: 30px;
+}
+.admin-cust-view-table table{
+    padding: 30px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border-radius: 20px;
+}

@@ -98,7 +98,6 @@ const userLogin = async (req,res)=>{
         
 //     }
 // }
-
 const AddToCart = async (req, res) => {
     try {
         console.log(req.body.obj);
@@ -107,22 +106,25 @@ const AddToCart = async (req, res) => {
         let cart = await CartModel.findOne({ userId: userId });
         console.log(cart);
 
-        if (!cart || (cart && cart.orderDetails != null)) {
+        if (!cart || cart.orderDetails === null) {
             console.log("Creating a new cart or orderDetails is null");
             obj.quantity = 1;
             let cartObject = {
                 userId,
                 product: [obj]
             };
-            let newCart = await CartModel.create(cartObject);
+            let newCart = await CartModel.findOneAndUpdate(
+                { userId: userId },
+                cartObject,
+                { upsert: true, new: true }
+            );
             console.log(newCart.product, "----new");
         } else {
             console.log("Cart exists and orderDetails is null");
             console.log(cart.product, "product id");
-            let cartExist = cart.product.findIndex((product) => product._id == obj._id);
-            console.log(cartExist, "product");
+            let productExists = cart.product.find((product) => product._id == obj._id);
 
-            if (cartExist === -1) {
+            if (!productExists) {
                 console.log("Product does not exist in the cart. Adding it...");
                 obj.quantity = 1;
                 await CartModel.findOneAndUpdate(
@@ -153,6 +155,8 @@ const AddToCart = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 };
+
+
 
 
 const getCartItem = async (req,res)=>{
