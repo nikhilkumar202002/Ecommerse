@@ -69,3 +69,15 @@
 .modal_btns{
     padding: 4px;
 }
+.close-btn button{
+    background-color: red;
+    color: white;
+    padding: 10px 30px 10px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.close-btn{
+    padding-top: 30px;
+    right: 0;
+}

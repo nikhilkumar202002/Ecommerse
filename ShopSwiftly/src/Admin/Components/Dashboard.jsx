@@ -9,14 +9,16 @@ function Dashboard() {
   const [countsData, setCountsData] = useState({
     productCount: 0,
     custCount: 0,
-    orderCount: 0,
-    deliveredProductCount: 0
+    orderLength: 0,
+    deliveredOrder: 0
   });
 
   useEffect(() => {
     Axios.get('/admin/getCounts').then((response)=>{
       try {
         console.log(response.data,"hello")
+        setCountsData(response.data)
+
       } catch (error) {
         console.log(error)
       }
@@ -43,8 +45,8 @@ function Dashboard() {
             <div className='dash_header'>
                 <div className='dash_box'><p>Products <br></br><span>{countsData.productCount}</span></p></div>
                 <div className='dash_box'><p>Categories<br></br><span>{countsData.custCount}</span></p></div>
-                <div className='dash_box'><p>Orders<br></br><span>{countsData.orderCount}</span></p></div>
-                <div className='dash_box'><p>Delivered<br></br><span>{countsData.deliveredProductCount}</span></p></div>
+                <div className='dash_box'><p>Orders<br></br><span>{countsData.orderLength}</span></p></div>
+                <div className='dash_box'><p>Delivered<br></br><span>{countsData.deliveredOrder}</span></p></div>
             </div>
         </section>
     </>

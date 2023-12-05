@@ -15,6 +15,7 @@ function Orders() {
   const [userData, setUserData] = React.useState("");
   const [Product, setProduct] = React.useState([]);
   const [userDetails,setUserDetials] = React.useState([]);
+  const [orders,setOrders] = useState([])
   const viewOrderstyle = {
     backgroundColor: "rgb(133, 133, 255)",
     border:"none",
@@ -40,10 +41,9 @@ function Orders() {
           }
          
     };
-  const handleClose = () => setOpen(false);
-    const [orders,setOrders] = useState([])
-    useEffect(() => {
-
+  
+    
+    const Getproducts = ()=>{
       try {
         Axios.get('/admin/getorders').then((response)=>{
           
@@ -57,10 +57,19 @@ function Orders() {
       } catch (error) {
         console.log(error)
       }
+    }
+    useEffect(() => {
+
+          try {
+            Getproducts()
+          } catch (error) {
+              console.log(error)
+          }
           
  }, [])
 
  const updateStatus = (value,cartID) =>{
+  console.log("clicked..")
       console.log(value,"value");
       let cartId =cartID;
       let status = {
@@ -76,7 +85,7 @@ function Orders() {
           console.log(error)
       }
  }
- 
+ function handleClose(){setOpen(false)};
   return (
     <>
         <>
@@ -139,6 +148,11 @@ function Orders() {
                                                   <button onClick={() => updateStatus(4,order._id)}>Delivered</button>
                                                 </div>
                                               </div>
+
+                                            </div>
+
+                                            <div className='close-btn '>
+                                              <button>Close</button>
                                             </div>
                                           </Typography>
                                         </Box>

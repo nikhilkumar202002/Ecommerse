@@ -91,15 +91,18 @@ const getCounts = async(req,res)=>{
         let productCount = await productModel.countDocuments({})
         let custCount = await UserModel.countDocuments({})
         let orders = await CartModel.find({ shippingStatus: { $ne: null } }).exec();
-        let deliveredProductCount = await productModel.countDocuments({ shippingStatus: '4' });
-
+        let deliveredProductCount = await CartModel.find({ shippingStatus: 1 })
+        console.log(deliveredProductCount,"delivered pro")
+        let orderLength = orders.length;
+        let deliveredOrder = deliveredProductCount.length
 
         let count = {
             productCount,
             custCount,
-            orders,
-            deliveredProductCount
+            orderLength,
+            deliveredOrder
         }
+        console.log(count,"counter")
         res.json(count)
     } catch (error) {
         console.log(error)
