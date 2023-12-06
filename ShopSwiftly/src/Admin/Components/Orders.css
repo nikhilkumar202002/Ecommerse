@@ -33,51 +33,33 @@
     padding: 10px;
     font-family: "Poppins";
 }
-.modal_container{
-    width: 30%;
-    padding: 30px;
-    position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400;
-  background-color: white;
-  box-shadow: 24;
-  padding: 4;
+.order_list table th{
+    font-size: 13px;
+    text-align: left;
 }
-#modal-modal-title{
-    font-size: 30px;
+.order_list table td{
+    font-size: 13px;
+}
+
+
+.order-details{
+    font-size: 12px;
     font-family: "Poppins";
     font-weight: 500;
-    color: rgb(133, 133, 255);;
 }
-.modal_content{
-    font-size: 20px;
-    font-family: "Poppins";
-}
-.modal_content button{
-    padding: 12px 18px 12px;
-    font-size: 15px;
-    background-color: rgb(133, 133, 255);
-    border: none;
-    outline: none;
-    color: white;
-}
-.modal_btn{
+.order-details-btn{
     display: flex;
 }
-.modal_btns{
-    padding: 4px;
+.order-details-btn .order-details-btns{
+    padding: 2px;
 }
-.close-btn button{
-    background-color: red;
-    color: white;
-    padding: 10px 30px 10px;
+.order-details-btns button{
+    font-size: 12px;
+    padding: 2px 4px;
+    background-color:rgb(133, 133, 255);
     border: none;
     outline: none;
     cursor: pointer;
-}
-.close-btn{
-    padding-top: 30px;
-    right: 0;
+    border-radius: 10px;
+    color: white;
 }

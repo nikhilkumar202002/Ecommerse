@@ -1,47 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import './Orders.css'
 import Axios from '../../Static/Axios'
 import { ImgUrl } from '../../Static/ImagUrl';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Stack from '@mui/material/Stack';
+
 
 function Orders() {
-  const [open, setOpen] = React.useState(false);
+  
   const [userData, setUserData] = React.useState("");
   const [Product, setProduct] = React.useState([]);
-  const [userDetails,setUserDetials] = React.useState([]);
   const [orders,setOrders] = useState([])
-  const viewOrderstyle = {
-    backgroundColor: "rgb(133, 133, 255)",
-    border:"none",
-    color:"white",
-    fontSize:"12px"
-  }
- 
-  const handleOpen = (userID) => {
-        let userData= userID;
-        console.log(userData,"userData")
-        let user ={
-          userData
-        }
-        console.log(user,"object")
-          try {
-            Axios.post('/admin/GetUser',user).then((response)=>{
-              console.log(response,"user fetch data")
-              setUserDetials(response.data[0])
-              setOpen(true)
-            })
-          } catch (error) {
-            
-          }
-         
-    };
+  const [userDetails,setUserDetials] = React.useState([]);
   
+
+ 
+
     
     const Getproducts = ()=>{
       try {
@@ -59,14 +31,13 @@ function Orders() {
       }
     }
     useEffect(() => {
-
+            
           try {
             Getproducts()
           } catch (error) {
               console.log(error)
           }
-          
- }, [])
+    }, [])
 
  const updateStatus = (value,cartID) =>{
   console.log("clicked..")
@@ -80,12 +51,13 @@ function Orders() {
       try {
         Axios.post('/admin/shippingStatus',status).then((response)=>{
             console.log(response.data)
+            
         })
       } catch (error) {
           console.log(error)
       }
  }
- function handleClose(){setOpen(false)};
+
   return (
     <>
         <>
@@ -108,7 +80,7 @@ function Orders() {
                     
                          {
 
-                              orders.map((order) => {
+                              orders.map((order,index) => {
 
                                 return order.product.map((Product) => (
                                   <tr key={Product.offer_price}>
@@ -116,54 +88,29 @@ function Orders() {
                                     <td>{Product.name}</td>
                                     <td>{Product.Category}</td>
                                     <td>
-                                      <button onClick={()=>handleOpen(order.userId)} style={viewOrderstyle}>
-                                        View Order
-                                      </button>
-                                      <Modal
-                                        open={open}
-                                        onClose={handleClose}
-                                        aria-labelledby="modal-modal-title"
-                                        aria-describedby="modal-modal-description"
-                                      >
-                                        <Box className="modal_container">
-                                          <Typography id="modal-modal-title" variant="h6" component="h2">
-                                            Order Details
-                                          </Typography>
-                                          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                            <div className="modal_content">
-                                              <p>Username: {userDetails ? userDetails.UserName : ''}</p>
-                                              <p>Email: {userDetails.Email}</p>
-                                              <p>Address: </p>
-                                              <div className="modal_btn">
-                                                <div className="modal_btns">
-                                                  <button onClick={() => updateStatus(1,order._id)}>Shipped</button>
-                                                </div>
-                                                <div className="modal_btns">
-                                                  <button onClick={() => updateStatus(2,order._id)}>PickUp</button>
-                                                </div>
-                                                <div className="modal_btns">
-                                                  <button onClick={() => updateStatus(3,order._id)}>Out of Delivery</button>
-                                                </div>
-                                                <div className="modal_btns">
-                                                  <button onClick={() => updateStatus(4,order._id)}>Delivered</button>
-                                                </div>
-                                              </div>
-
-                                            </div>
-
-                                            <div className='close-btn '>
-                                              <button>Close</button>
-                                            </div>
-                                          </Typography>
-                                        </Box>
-                                      </Modal>
+                                      <div className='order-details'>
+                                        <p>Name : {userDetails ? userDetails.UserName : ''}</p>
+                                        <p>Email : {userDetails.Email}</p>
+                                        <p>Address : </p>
+                                        <div className='order-details-btn'>
+                                          <div className='order-details-btns'>
+                                            <button onClick={()=>updateStatus(1,order._id)}>Shipped</button></div>
+                                          <div className='order-details-btns'>
+                                            <button onClick={()=>updateStatus(2,order._id)}>Pick Up</button></div>
+                                          <div className='order-details-btns'>
+                                            <button onClick={()=>updateStatus(3,order._id)}>Out of Delivery</button></div>
+                                          <div className='order-details-btns'>
+                                            <button onClick={()=>updateStatus(4,order._id)}>Delivered</button></div>
+                                        </div>
+                                      </div>
                                     </td>
                                     <td>  
                                       <div className='table-btn'>
                                       <button onClick={updateStatus(1,order._id)} style={{backgroundColor:"#29bf12",
                                                       border:"none",
                                                       outline:"none",
-                                                      color:"white"
+                                                      color:"white",
+                                                      fontSize : "12px"
                                     
                                     }}>Confirm</button>
                                       <button style={{backgroundColor:"#e01e37",

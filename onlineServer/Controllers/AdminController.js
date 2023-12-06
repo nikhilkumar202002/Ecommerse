@@ -3,6 +3,7 @@ const { response } = require("express");
 const productModel = require("../Models/Addproductmodel")
 const CartModel = require('../Models/CartModel');
 const UserModel = require("../Models/UserModel");
+const categorymodel = require("../Models/Addcategorymodel");
 const getProduct = async (req,res)=>{
     try {
        let products = await productModel.find()
@@ -108,6 +109,25 @@ const getCounts = async(req,res)=>{
         console.log(error)
     }
 }
+const addcategory = async (req,res)=>{
+    console.log(req.body)
+    // console.log(req.files)
+    console.log("am here at add p")
+   
+    try {
+        let category = await categorymodel.create(req.body).then((err)=>{
+            if(!err){
+                res.json(true)
+            }else{
+                console.log(err)
+            }
+        })
+       
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
 module.exports = 
 {
 addproduct,
@@ -117,6 +137,7 @@ getOrders,
 GetUser,
 shippingStatus,
 getCustomer,
-getCounts
+getCounts,
+addcategory
 }
 
