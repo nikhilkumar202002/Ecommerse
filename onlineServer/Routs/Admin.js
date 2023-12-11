@@ -10,7 +10,8 @@ GetUser,
 shippingStatus,
 getCustomer,
 getCounts,
-addcategory
+addcategory,
+getCategory
 } = require('../Controllers/AdminController');
 
 router.post('/add-product', addproduct);
@@ -24,5 +25,8 @@ router.route('/shippingStatus').post(shippingStatus)
 router.route('/getCustomer').get(getCustomer);
 router.route('/getCounts').get(getCounts)
 router.route('/add-category').post(addcategory)
+router.route('/getCategory').get(getCategory)
+
+
 
 module.exports = router;   

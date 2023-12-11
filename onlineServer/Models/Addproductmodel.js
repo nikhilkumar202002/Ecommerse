@@ -5,7 +5,7 @@ const AddProductSchema =  new Schema({
     name : {
         type : String,
         require : true,
-        maxlength : 40
+        maxlength : 200
     },
     price : {
         type : String,
@@ -20,11 +20,11 @@ const AddProductSchema =  new Schema({
     description : {
         type : String,
         require : true,
-        maxlenght : 10000
+        maxlenght : 100000
     },
     Category : {
         type:String,
-        default : "Mobile",
+        require : true,
         maxlenght : 40
     }
 })

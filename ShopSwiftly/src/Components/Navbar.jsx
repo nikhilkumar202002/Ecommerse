@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
 import cart from "../Icons/cart.svg"
@@ -7,17 +7,39 @@ import profile from "../Icons/account.svg"
 import menuIcon from "../Icons/menu.svg"
 import { UserContext } from '../Static/UserContext'
 import ProfilePic from '../Images/elssie.jpg'
+import Axios from '../Static/Axios'
 
 
 
 
 function Navbar() {
     const {user,setUser} = useContext(UserContext)
+    const [categories, setCategories] = useState([]);
+
     console.log(user,"from nav")
     const logout = ()=>{
         localStorage.removeItem("Auth_info");
         setUser(null)
     }
+    
+
+    
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+               Axios.get('/getCategory').then((response)=>{
+                console.log(response.data,"hello")
+                setCategories(response.data)
+               })
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+    
     
   return (
     <>
@@ -32,17 +54,11 @@ function Navbar() {
                         <li><div className='dropDown'>
                             <button>Category</button>
                             <div className='dropDownlist'>
-                                <ul>
-                                    <li>Electronics</li>
-                                    <li>Men's Fashion</li>
-                                    <li>Ladies Fasion</li>
-                                    <li>Laptops</li>
-                                    <li>Sports & Outdoors</li>
-                                    <li>Books</li>
-                                    <li>Health & Beauty</li>
-                                    <li>Furniture</li>
-                                    <li>Kitchen Essentials</li>
-                                </ul>
+                                {categories.map((category) => (
+                                <div className='dropDownlist-items'>{category.name}</div>
+                                ))}
+    
+                            
                             </div>
                             </div></li>
 

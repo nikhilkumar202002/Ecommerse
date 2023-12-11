@@ -13,6 +13,9 @@
 }
 .single_product{
     display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 40px;
 }
 .page_heading h1{
     font-size: 30px;
@@ -79,4 +82,21 @@
 .single_product_details{
     padding-left: 30px;
     padding-top: 50px;
+    width: 50%;
+}
+.single_product_images{
+    width: 400px;
+}
+.single_product_images img{
+    width: 100%;
+}
+.product1_description{
+    margin-top: -25px;
+    width: 70%;
+}
+.product1_description p{
+    font-size: 20px;
+}
+.product1_price{
+    margin-top: 40px;
 }

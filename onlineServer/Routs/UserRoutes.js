@@ -11,7 +11,10 @@ increment,
 decrement,
 orderCtreate,
 orderPayment,
-myOrders} =  require('../Controllers/UserConrtoller')
+myOrders,
+getCategory,getProductSingleView
+} =  require('../Controllers/UserConrtoller');
+const { getProduct } = require('../Controllers/AdminController');
 
 router.route('/').get(HomepageData)
 router.route('/UserRegistration').post(userRegistration)
@@ -24,4 +27,6 @@ router.route('/decrement').post(decrement)
 router.route('/CreateOrder').post(orderCtreate)
 router.route('/payment').post(orderPayment)
 router.route('/myorders').post(myOrders)
+router.route('/getCategory').get(getCategory)
+router.route('/get-Single-Product').post(getProductSingleView)
 module.exports = router;

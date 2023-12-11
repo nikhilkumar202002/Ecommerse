@@ -110,22 +110,27 @@ const getCounts = async(req,res)=>{
     }
 }
 const addcategory = async (req,res)=>{
-    console.log(req.body)
+    console.log(req.body,"cata")
     // console.log(req.files)
-    console.log("am here at add p")
+    console.log("product Added")
    
     try {
-        let category = await categorymodel.create(req.body).then((err)=>{
-            if(!err){
+        let Category = await categorymodel.create(req.body);
                 res.json(true)
-            }else{
-                console.log(err)
-            }
-        })
-       
     } catch (error) {
         console.log(error);
         
+    }
+}
+const getCategory = async(req,res)=>{
+    console.log(req.body,"categories")
+    try {
+        let categoryData = await categorymodel.find()
+        console.log(categoryData,"hello")
+        console.log("categories")
+        res.json(categoryData)
+    } catch (error) {
+        console.log(error)
     }
 }
 module.exports = 
@@ -138,6 +143,7 @@ GetUser,
 shippingStatus,
 getCustomer,
 getCounts,
-addcategory
+addcategory,
+getCategory
 }
 

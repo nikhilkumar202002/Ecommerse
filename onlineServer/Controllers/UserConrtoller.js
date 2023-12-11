@@ -1,5 +1,7 @@
 const userModel = require('../Models/UserModel')
 const CartModel = require('../Models/CartModel')
+const categorymodel = require('../Models/Addcategorymodel')
+const productmodel = require('../Models/Addproductmodel');
 const bcrypt = require('bcryptjs'); 
 const Razorpay = require('../Payments/Razorpay')
 const HomepageData = (req,res)=>{
@@ -267,7 +269,42 @@ const myOrders = async (req,res) =>{
     }
 }
 
-
+const getCategory = async(req,res)=>{
+    console.log(req.body,"categories")
+    try {
+        let categoryData = await categorymodel.find()
+        console.log(categoryData,"hello")
+        res.json(categoryData)
+    } catch (error) {
+        console.log(error)
+    }
+}
+const getProductSingleView = async(req,res)=>{
+        try {
+                let {id} = req.body;
+                    let product = await productmodel.findOne({_id:id})
+                    if(product){
+                            res.json(product)
+                    }else{
+                            res.json(product)
+                    }
+        } catch (error) {
+            console.log(error) 
+        }
+}
+const getProductsByCategory = async(req,res)=>{
+    try {
+        let {id} = req.body;
+        let category = await categorymodel.findOne({_id:id})
+        if(category){
+            res.json(category)
+        }else{
+            res.json(category)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
 module.exports = 
 {
 HomepageData,
@@ -281,5 +318,8 @@ increment,
 orderCtreate,
 orderPayment,
 myOrders,
+getCategory,
+getProductSingleView,
+getProductsByCategory
 
 }

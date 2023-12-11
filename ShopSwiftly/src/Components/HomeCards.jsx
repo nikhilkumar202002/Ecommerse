@@ -5,6 +5,7 @@ import Axios from '../Static/Axios'
 import { UserContext } from '../Static/UserContext'
 import { Navigate } from 'react-router'
 import {ImgUrl} from '../Static/ImagUrl'
+import { Link } from 'react-router-dom'
 
 function HomeCards() {
     const navigate = useNavigate();
@@ -56,7 +57,10 @@ function HomeCards() {
                     <>
                          <div className='homeCard'>
                 <div className='homeCardimage'>
+                    <Link to={`/products/${obj._id}`}>
                     <img src={  ImgUrl + '/' + obj._id+'.jpg'} alt="" />
+                    </Link>
+                    
                 </div>
                 <div className='homeCarddetails'>
                     <div className='pname'>

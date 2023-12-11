@@ -16,6 +16,7 @@ import Adminod from './Admin/Pages/Orders'
 import { UserContext } from './Static/UserContext';
 import AdminSignIn from './Admin/Pages/Adminsignin'
 import AdminCust from './Admin/Pages/Customers';
+import CategorySinglePage from './Pages/CategorySingle';
 
 function App() {
       const [user, setUser] = useState(null);
@@ -39,7 +40,8 @@ function App() {
     <Route path="signup" element={<SignUp />} />
     <Route path="cart" element={<CartPage/>}/>
     <Route path="myorders" element={<MyOrders/>}/>
-    <Route path="products" element={<Singlepageproduct/>}/>
+    <Route path="products/:id" element={<Singlepageproduct/>}/>
+    <Route path="categorysinglepage/:id" element={<CategorySinglePage/>}/>
 
 
     {/* Admin routes */}

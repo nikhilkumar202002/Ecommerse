@@ -5,8 +5,8 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 
 function Addcategory() {
-    const [categoryStatus, setcategoryStatus] = useState(false)
     
+    const [categoryStatus, setcategoryStatus] = useState(false)
     const catergoryRef = useRef(null);
 
     const handleSubmit = (event) =>{
@@ -16,8 +16,8 @@ function Addcategory() {
         console.log("categoryName :",CategoryName);
 
         const formData = new FormData();
-                formData.append('catname',CategoryName);
-                console.log(formData)
+                formData.append('name', CategoryName);
+                console.log(formData,"hello")
 
         try {
             Axios.post('/admin/add-category',formData).then((response)=>{
@@ -54,7 +54,9 @@ function Addcategory() {
                 <input type="file" /><br />
                 <button type="submit">Add Product</button>
 
-                {
+               
+            </form>
+            {
                             categoryStatus ?
                             <div className='alert-category'> 
                         <Stack sx={{ width: '100%' }} spacing={2}>
@@ -63,7 +65,6 @@ function Addcategory() {
                         </div>
                         : ""
                         }
-            </form>
         </div>
     </section>
 </>

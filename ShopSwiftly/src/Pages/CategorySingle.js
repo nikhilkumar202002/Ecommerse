@@ -1,19 +1,19 @@
 import React from 'react'
-import Products from '../Components/SinglePage'
+import CategorySinglePage from '../Components/CategoriesSingle'
 import Navbar from '../Components/Navbar'
 import Footer from '../Components/Footer'
 import { useParams } from 'react-router'
-  
-function Signleproduct() {
-      const {id} = useParams()
+
+function CategorySingle() {
+    const {id} = useParams()
       console.log(id,"id from single")
   return (
     <>
         <Navbar/>
-        <Products id={id}/>
+        <CategorySinglePage id={id}/>
         <Footer/>
     </>
   )
 }
 
-export default Signleproduct
+export default CategorySingle
