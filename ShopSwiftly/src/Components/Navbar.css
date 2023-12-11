@@ -52,15 +52,16 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
-.dropDownlist .dropDownlist-items{
+.dropDownlist .dropDownlist-items a{
     color: black;
     padding: 20px;
     text-decoration: none;
     display: block;
     text-align: left;
 }
-.dropDownlist .dropDownlist-items:hover{
+.dropDownlist .dropDownlist-items a:hover{
     background-color: #ddd;
+    cursor: pointer;
     
 }
 .dropDown:hover .dropDownlist {

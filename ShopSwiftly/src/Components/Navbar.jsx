@@ -23,22 +23,36 @@ function Navbar() {
     }
     
 
-    
+    const fetchCategories = async () => {
+        try {
+           Axios.get('/getCategory').then((response)=>{
+            console.log(response.data,"hello")
+            setCategories(response.data)
+           })
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-               Axios.get('/getCategory').then((response)=>{
-                console.log(response.data,"hello")
-                setCategories(response.data)
-               })
-            } catch (error) {
-                console.log(error);
-            }
-        };
-
         fetchCategories();
     }, []);
+
+    const getCategorySingle = async(category)=>{
+        try {
+            console.log(category,"hello category single");
+            let data = {
+                category
+            }
+            Axios.post('/get-product-cat',data).then((response)=>{
+                console.log(response.data,"hello cat") 
+                
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
     
     
   return (
@@ -54,10 +68,11 @@ function Navbar() {
                         <li><div className='dropDown'>
                             <button>Category</button>
                             <div className='dropDownlist'>
+                                <div className='dropDownlist-items'>
                                 {categories.map((category) => (
-                                <div className='dropDownlist-items'>{category.name}</div>
+                                <Link onClick={()=>getCategorySingle(category.name)}>{category.name}</Link>
                                 ))}
-    
+                             </div>
                             
                             </div>
                             </div></li>

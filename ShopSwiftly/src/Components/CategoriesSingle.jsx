@@ -8,24 +8,17 @@ import Axios from '../Static/Axios'
 import Typography from '@mui/material/Typography';
 import './CategoriesSingle.css'
 
-function CategoriesSingle() {
+function CategoriesSingle({products}) {
     const { id } = useParams();
     const [categoryProducts, setCategoryProducts] = useState([]);
 
     useEffect(() => {
-        const fetchCategoryProducts = () => {
-          try {
-            Axios.get(`/get-product-cat/${id}`).then((response)=>{
-                console.log(response.data,"category single page")
-                setCategoryProducts(response.data);
-            });
-          } catch (error) {
-            console.log(error);
-          }
-        };
-    
-        fetchCategoryProducts();
-      }, [id]);
+        try {
+          
+        } catch (error) {
+          
+        }
+      }, []);
     
 
 
@@ -34,7 +27,8 @@ function CategoriesSingle() {
         <div className='category-single-page'>
             <h1></h1>
         </div>
-        <div className='category-single-cards'>
+         
+    <div className='category-single-cards'>
         <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
@@ -58,6 +52,8 @@ function CategoriesSingle() {
       </CardActions>
     </Card>
         </div>
+         
+  
         
     </>
   )

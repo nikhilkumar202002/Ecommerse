@@ -12,7 +12,9 @@ decrement,
 orderCtreate,
 orderPayment,
 myOrders,
-getCategory,getProductSingleView
+getCategory,
+getProductSingleView,
+getProductsByCategory
 } =  require('../Controllers/UserConrtoller');
 const { getProduct } = require('../Controllers/AdminController');
 
@@ -29,4 +31,5 @@ router.route('/payment').post(orderPayment)
 router.route('/myorders').post(myOrders)
 router.route('/getCategory').get(getCategory)
 router.route('/get-Single-Product').post(getProductSingleView)
+router.route('/get-product-cat').post(getProductsByCategory)
 module.exports = router;

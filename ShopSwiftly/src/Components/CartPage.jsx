@@ -1,146 +1,147 @@
-import React, { useEffect ,useContext, useState} from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import './CartPage.css'
 import Axios from '../Static/Axios'
 import { UserContext } from '../Static/UserContext'
 import { json } from 'react-router'
-import {ImgUrl} from '../Static/ImagUrl'
+import { ImgUrl } from '../Static/ImagUrl'
 import RenderRazorpay from './RenderRazorpay'
 
 function CartPage() {
-    
-        const {user,setUser} = useContext(UserContext)
-        const [cartItems, setCartitems] = useState([])
-        const [total,setTotal] =useState("")
-        const [displayRazorpay, setDisplayRazorpay] = useState(false);
 
-        const [orderDetails, setOrderDetails] = useState({
-            orderId: null,
-            currency: null,
-            amount: null,
-           });
-        const totalAmt = ()=>{
-            
+    const { user, setUser } = useContext(UserContext)
+    const [cartItems, setCartitems] = useState([])
+    const [total, setTotal] = useState("")
+    const [displayRazorpay, setDisplayRazorpay] = useState(false);
+
+    const [orderDetails, setOrderDetails] = useState({
+        orderId: null,
+        currency: null,
+        amount: null,
+    });
+    const totalAmt = () => {
+
+    }
+    useEffect(() => {
+        try {
+            getItems();
+
+        } catch (error) {
+            console.log(error)
         }
-        useEffect( () => {
-            try {
-                getItems();
-                    
-            } catch (error) {
-                console.log(error)
-            }
-        }, [])
+    }, [])
 
-        const removeCart = ((id)=>{
-                console.log(id,"cart remove id")
-                let user_Id = user.user._id
-                    let Data_user ={
-                        id,
-                        user_Id
-                    }
-                    
-                try {
-                    Axios.post('/RemoveFromCart',Data_user).then((response)=>{
-                       console.log(response.data)
+    const removeCart = ((id) => {
+        console.log(id, "cart remove id")
+        let user_Id = user.user._id
+        let Data_user = {
+            id,
+            user_Id
+        }
+
+        try {
+            Axios.post('/RemoveFromCart', Data_user).then((response) => {
+                console.log(response.data)
+            })
+            getItems();
+        } catch (error) {
+            console.log(error)
+        }
+
+    })
+
+    const getItems = () => {
+        try {
+            console.log("get cart working")
+            let userData = JSON.parse(localStorage.getItem('Auth_info'))
+            if (!userData || !userData.user) {
+                throw new Error('User data not found in localStorage');
+              }
+            userData = userData.user;
+            console.log(userData, "Userid from cart from auth info")
+            Axios.post('/getCartItem', userData).then((response) => {
+                console.log(response.data, "cartData")
+                if (response.data && response.data.product) {
+                    setCartitems(response.data.product)
+                    let payment = 0;
+                    response.data.product.map((item) => {
+                        console.log(item.offer_price)
+                        payment = payment + (parseInt(item.offer_price) * parseInt(item.quantity));
                     })
-                    getItems();
-                } catch (error) {
-                    console.log(error)
+                    console.log(payment, "payment");
+                    setTotal(payment)
                 }
+            })
+            totalAmt();
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-        })
+    const increment = (id) => {
+        console.log("working")
+        let user_Id = user.user._id
+        let product = {
+            id,
+            user_Id
+        }
+        try {
+            Axios.post('/increment', product).then((response) => {
+                console.log(response.data)
 
-        const getItems = ()=>{
-                        try {
-                                        console.log("get cart woriing")      
-                                        let userData = JSON.parse(localStorage.getItem('Auth_info'))
-                                        userData = userData.user;
-                                        console.log(userData,"Userid from cart from auth info")
-                                            Axios.post('/getCartItem',userData).then((response)=>{
-                                            console.log(response.data,"cartData")
-                                                if(response.data){
-                                                    setCartitems(response.data.product)
-                                                    let payment = 0;
-                                                    response.data.product.map((item)=>{
-                                                                    console.log(item.offer_price)
-                                                                    payment = payment + (parseInt(item.offer_price) * parseInt(item.quantity));
-                                                                }) 
-                                                            console.log(payment,"payment");
-                                                            setTotal(payment)
-                                                }
-                                           
-                                           
-                                            
-                                    })
-                                    totalAmt(); 
-                        } catch (error) {
-                                console.log(error)   
-                        }
-                    }
-        const increment = (id)=>{
-            console.log("working")
-            let user_Id = user.user._id
-            let product = {
-                    id,
-                    user_Id
-            }   
-            try {
-                Axios.post('/increment',product).then((response)=>{
-                        console.log(response.data)
-                      
-                })
-                getItems() 
-            } catch (error) {
-                    console.log(error)
-            }
+            })
+            getItems()
+        } catch (error) {
+            console.log(error)
         }
-        const decrement = (id)=>{
-            console.log("working")
-            let user_Id = user.user._id
-            let product = {
-                    id,
-                    user_Id
-            }
-            try {
-                Axios.post('/decrement',product).then((response)=>{
-                        console.log(response.data)
-                        
-                })
-                getItems()
-            } catch (error) {
-                    console.log(error)
-            }
+    }
+    const decrement = (id) => {
+        console.log("working")
+        let user_Id = user.user._id
+        let product = {
+            id,
+            user_Id
         }
-        const checkOut = async()=>{
-            let  userId = user.user._id;
-            let Data  = {
-                total,
-                userId
-            }
-            try {
-                
-                    const {data} = await Axios.post('/CreateOrder',
-                     {
-                        amount: total*100, //convert amount into lowest unit. here, Dollar->Cents
-                      keyId:"rzp_test_ZQzRHblUiM9SYF",
-                      KeySecret: "Ba9TrQ7sz2SkoeWwliVfhP3R",
-                     }
-                    );
-                    console.log(data,"data")
-                    if(data){
-                        setOrderDetails({
-                          orderId: data.id,
-                          currency: data.currency,
-                          amount: data.amount/100,
-                        });
-                        setDisplayRazorpay(true); 
-                    }
-                   
-            } catch (error) {
-                    console.log(error)
-            }
+        try {
+            Axios.post('/decrement', product).then((response) => {
+                console.log(response.data)
+
+            })
+            getItems()
+        } catch (error) {
+            console.log(error)
         }
-  return (
-    <>
+    }
+    const checkOut = async () => {
+        let userId = user.user._id;
+        let Data = {
+            total,
+            userId
+        }
+        try {
+
+            const { data } = await Axios.post('/CreateOrder',
+                {
+                    amount: total * 100, //convert amount into lowest unit. here, Dollar->Cents
+                    keyId: "rzp_test_ZQzRHblUiM9SYF",
+                    KeySecret: "Ba9TrQ7sz2SkoeWwliVfhP3R",
+                }
+            );
+            console.log(data, "data")
+            if (data) {
+                setOrderDetails({
+                    orderId: data.id,
+                    currency: data.currency,
+                    amount: data.amount / 100,
+                });
+                setDisplayRazorpay(true);
+            }
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return (
+        <>
             <div className='cart_heading'>'
                 <h1>My Cart</h1>
             </div>
@@ -149,28 +150,28 @@ function CartPage() {
                 <div className='cart_item'>
                     {
                         cartItems ?
-                            cartItems.map((item)=>{
-                                    return (
-                                        <>
+                            cartItems.map((item) => {
+                                return (
+                                    <>
                                         <div className='cart_items'>
-                                                <div className='cart_products'>
-                                                    <div className='cart_product_img'>
-                                                        <img src={  ImgUrl + '/' + item._id+'.jpg'} alt="" />
-                                                    </div>
-                                                    <div className='cart_product_details'>
-                                                        <p><b>{item.name}</b></p>
-                                                        <p>{item.offer_price}</p>
-                                                        <button onClick={()=>removeCart(item._id)}>Remove</button>
+                                            <div className='cart_products'>
+                                                <div className='cart_product_img'>
+                                                    <img src={ImgUrl + '/' + item._id + '.jpg'} alt="" />
+                                                </div>
+                                                <div className='cart_product_details'>
+                                                    <p><b>{item.name}</b></p>
+                                                    <p>{item.offer_price}</p>
+                                                    <button onClick={() => removeCart(item._id)}>Remove</button>
                                                 </div>
                                             </div>
-                                                <div className='cart_product_counter'>
-                                                    <button onClick={()=>increment(item._id)}>+</button>
-                                                    <input type="number" value= {item.quantity} />
-                                                    <button onClick={()=>decrement(item._id)}>-</button>
-                                                </div>
+                                            <div className='cart_product_counter'>
+                                                <button onClick={() => decrement(item._id)}>-</button>
+                                                <input type="number" value={item.quantity} />
+                                                <button onClick={() => increment(item._id)}>+</button>
+                                            </div>
                                         </div>
-                                        </>
-                                    )
+                                    </>
+                                )
                             }) :
                             <h1>Cart Empty!</h1>
 
@@ -203,23 +204,23 @@ function CartPage() {
 
                     </div>
                     <div className='cart_checkout_btn'>
-                            <button onClick={()=>checkOut()}>Checkout</button>
-                        </div>
+                        <button onClick={() => checkOut()}>Checkout</button>
+                    </div>
                 </div>
                 {
                     displayRazorpay && (
-                            <RenderRazorpay
-                                 amount={orderDetails.amount}
-                                 currency={orderDetails.currency}
-                                 orderId={orderDetails.orderId}
-                                 keyId="rzp_test_ZQzRHblUiM9SYF"
-                                keySecret="Ba9TrQ7sz2SkoeWwliVfhP3R"
-                            />
+                        <RenderRazorpay
+                            amount={orderDetails.amount}
+                            currency={orderDetails.currency}
+                            orderId={orderDetails.orderId}
+                            keyId="rzp_test_ZQzRHblUiM9SYF"
+                            keySecret="Ba9TrQ7sz2SkoeWwliVfhP3R"
+                        />
                     )
                 }
             </section>
-    </>
-  )
+        </>
+    )
 }
 
 export default CartPage

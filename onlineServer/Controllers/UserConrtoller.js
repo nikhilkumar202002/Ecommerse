@@ -36,7 +36,7 @@ const userLogin = async (req,res)=>{
     const   pass = req.body.Password;
         try {
             let user = await userModel.findOne({Email:Email})
-            console.log(user)
+            console.log(user,"Hello User")
             let Password =user.Password;
             let compare = await bcrypt.compare(pass,Password)
             console.log(compare)
@@ -44,7 +44,7 @@ const userLogin = async (req,res)=>{
                 
                 let userId = user._id;
                 let cart= await CartModel.findOne({userId:userId})
-                 let cartTotal = cart.product.length;
+                const cartTotal = cart ? cart.product.length : 0;
                 console.log(cartTotal,"cart")
                 let userData = {
                         user,
@@ -52,7 +52,7 @@ const userLogin = async (req,res)=>{
                 }
                 res.json(userData)
             }else{
-                res.json(false)
+                res.json(userData)
                 console.log(false)
             }     
         } catch (error) {
@@ -106,6 +106,7 @@ const AddToCart = async (req, res) => {
         let { obj } = req.body;
         let userId = req.body.userId;
         let cart = await CartModel.findOne({ userId: userId });
+        
         console.log(cart);
 
         if (!cart || cart.orderDetails === null) {
@@ -293,13 +294,14 @@ const getProductSingleView = async(req,res)=>{
         }
 }
 const getProductsByCategory = async(req,res)=>{
+    console.log(req.body,"cat key")
     try {
-        let {id} = req.body;
-        let category = await categorymodel.findOne({_id:id})
-        if(category){
-            res.json(category)
+        let {category} = req.body;
+        let categories = await productmodel.find({Category:category})
+        if(categories){
+            res.json(categories)
         }else{
-            res.json(category)
+            res.json(false)
         }
     } catch (error) {
         console.log(error)
