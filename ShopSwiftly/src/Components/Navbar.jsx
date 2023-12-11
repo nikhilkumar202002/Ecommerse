@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import cart from "../Icons/cart.svg"
 import logo from "../Icons/logo.svg"
 import profile from "../Icons/account.svg"
@@ -15,6 +15,8 @@ import Axios from '../Static/Axios'
 function Navbar() {
     const {user,setUser} = useContext(UserContext)
     const [categories, setCategories] = useState([]);
+
+    const navigate = useNavigate();
 
     console.log(user,"from nav")
     const logout = ()=>{
@@ -46,7 +48,10 @@ function Navbar() {
             }
             Axios.post('/get-product-cat',data).then((response)=>{
                 console.log(response.data,"hello cat") 
-                
+                const 
+                _id = response.data.id;
+                navigate(`/category/${_id}`);
+            
             })
         } catch (error) {
             console.log(error)

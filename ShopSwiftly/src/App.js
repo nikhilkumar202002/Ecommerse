@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Routes, Route, json, useMatch } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import Home from './Pages/Home'
 import Products from './Pages/Products'
 import About from './Pages/About'
@@ -41,7 +41,7 @@ function App() {
     <Route path="cart" element={<CartPage/>}/>
     <Route path="myorders" element={<MyOrders/>}/>
     <Route path="products/:id" element={<Singlepageproduct/>}/>
-    <Route path="categorysinglepage" element={<CategorySinglePage/>}/>
+    <Route path="categorysinglepage/:id" element={<CategorySinglePage/>}/>
 
 
     {/* Admin routes */}
