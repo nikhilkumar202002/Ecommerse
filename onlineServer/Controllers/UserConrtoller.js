@@ -297,7 +297,7 @@ const getProductsByCategory = async(req,res)=>{
     console.log(req.body,"cat key")
     try {
         let {category} = req.body;
-        let categories = await productmodel.find({Category:category})
+        let categories = await productmodel.find({category:category})
         if(categories){
             res.json(categories)
         }else{

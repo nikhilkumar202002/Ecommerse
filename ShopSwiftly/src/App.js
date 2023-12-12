@@ -41,7 +41,7 @@ function App() {
     <Route path="cart" element={<CartPage/>}/>
     <Route path="myorders" element={<MyOrders/>}/>
     <Route path="products/:id" element={<Singlepageproduct/>}/>
-    <Route path="categorysinglepage/:id" element={<CategorySinglePage/>}/>
+    <Route path="/categorysinglepage/:id" element={<CategorySinglePage/>}/>
 
 
     {/* Admin routes */}

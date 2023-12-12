@@ -1,6 +1,4 @@
-.category-single-cards{
-    padding-left: 50px;
-}
+
 .category-btns button{
     background-color: #FD7B2B;
     border: none;
@@ -34,4 +32,29 @@
     font-size: 13px;
     padding-left: 10px;
     color: red;
+}
+.category-single-cards{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.pro-description{
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.pro-name{
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.pro-image{
+    object-fit: cover;
+}
+.pro-card{
+    box-shadow: rgba(9, 30, 78, 0.04) 0px 1px
 }

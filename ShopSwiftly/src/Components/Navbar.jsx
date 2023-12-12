@@ -48,9 +48,10 @@ function Navbar() {
             }
             Axios.post('/get-product-cat',data).then((response)=>{
                 console.log(response.data,"hello cat") 
-                const 
-                _id = response.data.id;
-                navigate(`/category/${_id}`);
+                response.data.forEach((products) => {
+                    const id = products.id; 
+                    navigate(`/categorysinglepage/${id}`);
+                  });
             
             })
         } catch (error) {
