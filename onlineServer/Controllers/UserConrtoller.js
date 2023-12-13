@@ -294,10 +294,12 @@ const getProductSingleView = async(req,res)=>{
         }
 }
 const getProductsByCategory = async(req,res)=>{
-    console.log(req.body,"cat key")
+    console.log(req.body,"Category key")
     try {
-        let {category} = req.body;
-        let categories = await productmodel.find({category:category})
+        let Cata = req.body.category.Category;
+        console.log(Cata,"Cata")
+        let categories = await productmodel.find({Category:Cata})
+        console.log(categories,"User Category")
         if(categories){
             res.json(categories)
         }else{

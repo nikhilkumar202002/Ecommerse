@@ -8,6 +8,9 @@ import menuIcon from "../Icons/menu.svg"
 import { UserContext } from '../Static/UserContext'
 import ProfilePic from '../Images/elssie.jpg'
 import Axios from '../Static/Axios'
+import DownArrow from '../Icons/down-arrow.svg'
+
+
 
 
 
@@ -28,7 +31,7 @@ function Navbar() {
     const fetchCategories = async () => {
         try {
            Axios.get('/getCategory').then((response)=>{
-            console.log(response.data,"hello")
+            console.log(response.data,"Categories")
             setCategories(response.data)
            })
         } catch (error) {
@@ -43,18 +46,9 @@ function Navbar() {
     const getCategorySingle = async(category)=>{
         try {
             console.log(category,"hello category single");
-            let data = {
-                category
-            }
-            Axios.post('/get-product-cat',data).then((response)=>{
-                console.log(response.data,"hello cat") 
-                response.data.forEach((products) => {
-                    const id = products.id; 
-                    navigate(`/categorysinglepage/${id}`);
-                  });
-            
-            })
-        } catch (error) {
+            navigate(`/categorysinglepage/${category}`);
+        } 
+        catch (error) {
             console.log(error)
         }
     }
@@ -70,23 +64,10 @@ function Navbar() {
                 </div>
                 <div className='navList'>
                     <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><div className='dropDown'>
-                            <button>Category</button>
-                            <div className='dropDownlist'>
-                                <div className='dropDownlist-items'>
-                                {categories.map((category) => (
-                                <Link onClick={()=>getCategorySingle(category.name)}>{category.name}</Link>
-                                ))}
-                             </div>
-                            
-                            </div>
-                            </div></li>
+                        
+                      
 
-                            <li><Link to="/product">Products</Link></li>
-                            <li> <Link to="/about">About Us</Link></li>
-                            <li><Link to="/blog">Blog</Link></li>
-                            { user ?  <li><Link to='/myorders'>My Orders</Link></li> : ""}
+                           
                            
                             <li>  <div className='searchBar'>
                     <input type="search" name="" id="" placeholder='Search Products...'/>
@@ -113,7 +94,7 @@ function Navbar() {
                     {
                         user ? 
 
-                                <button className='user_profile'><img src={ProfilePic} alt=""/>{user.user.UserName}</button>
+                                <button className='user_profile'><img src={ProfilePic} alt=""/>{user.user.UserName} <span><img src={DownArrow} alt="" /></span></button>
                         :
                                 <button><img src={profile} alt="" /></button>
                     }
@@ -138,6 +119,36 @@ function Navbar() {
                 </div>
             </div>
           
+        </div>
+
+        <div className='second-nav'>
+            <div className='second-nav-list'>
+                <ul>
+                    <li><Link to="/">Home</Link></li>
+                    <li>
+                        <div className='dropDown'>
+                            <button>Category</button>
+                                <div className='dropDownlist'>
+                                    <div className='dropDownlist-items'>
+                                        
+                                        {categories.map((category) => (
+                                            <div className='drop-Down-items' onClick={()=>getCategorySingle(category.name)}>{category.name}</div>
+                                            ))}
+                                        
+                                
+                               
+                              
+                                    </div>
+                            
+                        </div>
+                    </div>
+                </li>
+                <li><Link to="/product">Products</Link></li>
+                <li><Link to="/about">About Us</Link></li>
+                <li><Link to="/blog">Blog</Link></li>
+                { user ?  <li><Link to='/myorders'>My Orders</Link></li> : ""}
+                </ul>
+            </div>
         </div>
     </>
   )

@@ -1,40 +1,68 @@
 .banner{
     display: flex;
-    padding-left: 40px;
+    padding: 30px 120px 30px;
+}
+.banner-section{
+    width: 100%;
 }
 .bannerLeft{
     padding-top: 100px;
+    line-height: 20px;
 }
 .bannerHeading h1{
-    font-family: Elephant;
-    font-size: 60px;
-    color: black;
+    font-family: "Poppins";
+    font-weight: 800;
+    line-height: 85px;
+    font-size: 80px;
+    color: rgb(44, 44, 44);
+}
+.bannerHeading span{
+    color: #FD7B2B;
 }
 .bannerSubheading{
     width: 80%;
-    top: -20px;
+    margin-top: -35px;
 }
 .bannerSubheading p{
-    font-size: 15px;
+    font-size: 17px;
+    font-family: "poppins";
+    color: rgb(75, 75, 75);
     top: -40px;
+    line-height: 25px;
 }
 .bannerButton{
     padding-top: 20px;
 }
 .bannerButton button{
-    padding: 15px 30px 15px;
+    padding: 10px 30px 10px;
+    font-family: "poppins";
     font-size: 18px;
     border-radius: 30px;
+    border: 1px solid #FD7B2B;
+    color: #FD7B2B;
+    font-weight: 500;
+    background-color: transparent;
+}
+.bannerButton button:hover{
     background-color: #FD7B2B;
     color: white;
-    font-weight: 600;
-    border: none;
+    transition: .5s;
+    
 }
+
 .bannerRight{
+    /* border: 1px solid; */
+    width: 50%;
     padding-top: 20px;
-    padding-left: 200px;
+    /* padding-left: 200px; */
 }
-.bannerRight img{
+.banner-right-image{
+    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.banner-right-image img{
     width: 100%;
 }
 @media (max-width:720px) {

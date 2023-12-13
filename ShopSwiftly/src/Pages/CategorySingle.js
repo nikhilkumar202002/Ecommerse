@@ -5,12 +5,12 @@ import Footer from '../Components/Footer'
 import { useParams } from 'react-router'
 
 function CategorySingle() {
-    const {id} = useParams()
-      console.log(id,"id from single")
+    const category = useParams()
+      console.log(category,"id from single")
   return (
     <>
         <Navbar/>
-        <CategorySinglePage id={id}/>
+        <CategorySinglePage />
         <Footer/>
     </>
   )

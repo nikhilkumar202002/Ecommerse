@@ -3,25 +3,26 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Axios from '../Static/Axios'
 import Typography from '@mui/material/Typography';
 import './CategoriesSingle.css'
 import { ImgUrl } from '../Static/ImagUrl'
 
 function CategoriesSingle() {
-    const id  = useParams();
+    const category  = useParams();
     const [categoryProducts, setCategoryProducts] = useState([]);
 
     useEffect(() => {
-        let category = {
-          id
+        let data = {
+          category
         }
+        console.log(data,"Category data")
         try {
-            Axios.post('/get-product-cat',category).then((response)=>{
-            console.log(response.data,"hello category");
-            setCategoryProducts(response.data)
-          })
+            Axios.post('/get-product-cat',data).then((response)=>{
+              console.log(response.data,"Category Page")
+              setCategoryProducts(response.data)
+            })
         } catch (error) {
           console.log(error)
         }

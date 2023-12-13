@@ -1,9 +1,10 @@
 .homecardheading h1{
     padding: 100px 40px 0px;
-    font-family: Elephant;
+    font-family: "Poppins";
     font-size: 30px;
-    letter-spacing: 4px;
-    font-weight: 600;
+    letter-spacing: 2px;
+    font-weight: 800;
+    color: rgb(42, 42, 42);
 }
 .homeCards{
     width: 100%; 

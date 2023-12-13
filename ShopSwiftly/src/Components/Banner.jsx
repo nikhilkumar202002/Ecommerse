@@ -1,9 +1,10 @@
 import React from 'react'
-import bannerImage from "../Images/banner.png"
+import BannerImages from '../Images/Wavy_Tech-19_Single-05.jpg'
 import './Banner.css'
 function Banner() {
   return (
     <>
+    <section className='banner-section'>
     <div className='banner'>
         <div className='bannerLeft'>
             <div className='bannerHeading'>
@@ -18,9 +19,12 @@ function Banner() {
            
         </div>
         <div className='bannerRight'>
-            <img src={bannerImage} alt="" />
+          <div className='banner-right-image'>
+          <img src={BannerImages} alt="" />
+          </div>
         </div>
     </div>
+    </section>
     </>
   )
 }
