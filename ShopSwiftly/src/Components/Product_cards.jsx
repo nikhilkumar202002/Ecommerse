@@ -40,7 +40,13 @@ function Product_cards() {
                         <p>{obj ? obj.name :""}</p>
                     </div>
                     <div className='product_review'>
-                        <p>4.5/5 <span><img src={Review_star} alt="" /></span></p>
+                        <div className='review-star'>
+                        <img src={Review_star} alt="" />
+                        </div>
+                        <div className='review-count'>
+                        <p>4.5/5</p>
+                        </div>
+                       
                     </div>
                     <div className='product_description'>
                         <p>{obj ? obj.description : ""}</p>

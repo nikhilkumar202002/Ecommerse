@@ -1,5 +1,5 @@
 .about_headiing h1{
-    font-family: Elephant;
+    font-family: "Poppins";
     font-size: 30px;
     letter-spacing: 4px;
     font-weight: 600;
@@ -10,52 +10,65 @@
 }
 .aboutus_left_content{
     width: 40%;
+    height: 400px;
     padding-left: 40px;
     padding-top: 30px;
 }
 .aboutus_left_content img{
     width: 100%;
-    border-radius: 30px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
 
 }
 .aboutus_content{
     display: flex;
-    padding-top: 120px;
-    padding-left: 20px;
+    padding: 100px 120px 100px;
 }
 
 .aboutus_right_content{
     width: 50%;
+    margin-top: -40px;
 }
 .about_description{
     padding-left: 40px;
 }
 .about_description p{
     font-size: 15px;
-    line-height: 23px;
+    line-height: 25px;
     text-align: justify;
-    color: black;opacity: 70%;
+    font-family: "Poppins";
+    color: rgb(66, 66, 66);
 
 }
 .about_button button{
-    width: 200px;
-    height: 56px;
-    border-radius: 30px;
-    font-size: 18px;
-    background-color: #FD7B2B;
-    color: white;
-    border: none;
+    border-radius: 4px;
+    font-size: 17px;
+    font-family: "poppins";
+    padding: 12px 40px;
+    background-color: transparent;
+    color: #FD7B2B;
+    border: 1px solid #FD7B2B;
 }
 .about_button button:hover{
-    border: 1px solid #FD7B2B;
-    background-color: white;
-    color: #FD7B2B;
+    background-color: #FD7B2B;
+    color: white;
     transition: 0.5s;
 }
 .about_button{
     padding-left: 40px;
     padding-top: 20px;
 }
+.aboutus_content {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 3s ease, transform 3s ease;
+  }
+  
+  .aboutus_content.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
 @media (max-width:720px) {
     .aboutus_content{

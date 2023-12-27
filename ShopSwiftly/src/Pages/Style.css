@@ -1,0 +1,12 @@
+nav {
+  width: 100%;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+nav.sticky {
+  position: fixed;
+  top: 0;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}

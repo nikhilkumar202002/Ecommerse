@@ -1,31 +1,30 @@
 .Nav{
     width: 100%;
-    padding: 15px 120px;
+    padding: 0px 120px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+
 }
-.Logo{
-    width: 160px;
+.Logo a{
+    text-decoration: none;
+    color: #ff6a00;
+    font-family: "poppins";
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.Logo img{
-    width: 100%;
-}
+
 .navCart img{
     width: 30px;
 }
 .Profile img{
     width: 25px;
 }
-.navList ul{
-    list-style: none;
-    overflow: hidden;
-}
-
 
 .dropDown button{
     background: transparent;
@@ -41,6 +40,8 @@
     background-color: #f9f9f9;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    right: 300px;
+    top: 60px;
 }
 .dropDownlist-items .drop-Down-items{
     list-style: none;
@@ -61,49 +62,39 @@
 .dropDown:hover .dropDownlist{
     display: block;
   }
-.leftNav{
-    display: flex;
-}
+
 .rightNav{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
+    
     
 }
-.searchBar input{
-    width: 550px;
-    padding: 10px;
-    font-size: 15px;
-    border: 1px solid rgb(214, 214, 214);
-    border-radius: 30px;
-    outline: none;
-
-}
-.searchBar button{
-    padding: 11px 20px 11px;
-    font-size: 15px;
-    border-radius: 30px;
-    border: none;
-    background-color:#FD7B2B;
-    color: white;
-    transform: translateX(-40px);
+.Profile{
+    padding-left: 20px;
 }
 .Profile button{
     background-color: rgb(247, 247, 247);
     padding: 10px;
     border: none;
 }
-.profileDropdown ul{
-    list-style: none;
-    overflow: hidden;
-}
-.profileDropdown ul li{
+
+.profileDropdown{
     display: block;
+    /* padding: 20px; */
+    max-width: 150px;
+    border-radius: 10px;
 
 }
-.profileDropdown ul li{
+.profile-list-items a{
     text-decoration: none;
     color: black;
+    font-family: "Poppins";
+    font-size: 18px;
+}
+.profile-list-items{
+    padding: 15px;
 }
 .profileDropdown{
     display: none;
@@ -112,23 +103,24 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
-    right: 20px;
-}
-.profileDropdown ul li{
-    float: left;
-    color: black;
-  /* padding: 12px 16px; */
-  text-decoration: none;
-  display: block;
-  text-align: left;
+    right: 160px;
+    top: 70px;
 }
 
-.Profile:hover .profileDropdown{
+
+.Profile:hover .profileDropdown ,.Profile button span img{
     display: block;
+    transform: .5s;
+    
 }
 .Hamburger{
-    display: none;
-
+    display: block;
+    padding-left: 20px;
+}
+.Hamburger button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 .Hamburger img{
     width: 40px;
@@ -144,7 +136,7 @@
     height: 18px;
     border-radius: 20px;
     margin-top: -40px;
-    margin-left: 22px;
+    margin-left: 15px;
     background-color: red;
     overflow: hidden;
 
@@ -176,34 +168,58 @@
     padding-left: 8px;
     padding-right: 8px;
 }
-.Profile button span img:hover{
+/* .Profile button span img:hover{
     transform: rotate(180deg);
-}
-
-/* second nav */
-
-.second-nav{
-    width: 100%;
-    margin-top: -20px;
-}
-.second-nav-list ul{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.second-nav-list ul li a{
+} */
+.nav-list-items a{
     text-decoration: none;
-    font-family: "poppins";
-    font-weight: 500;
+    color: rgb(27, 27, 27);
+    transition: all 0.3s ease;
+    font-family: "Poppins";
     font-size: 18px;
-    color: rgb(50, 50, 50);
-    padding: 20px;
+    font-weight: 500;  
 }
+.nav-list-items a:hover{
+    color: #ff6a00;
+    transition: .5s;
+    font-weight: 600;
+
+}
+.nav-list-items{
+    padding: 20px 40px;
+}
+.nav-list{
+    width: 350px;
+    list-style: none;
+    padding: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: white;
+    position: absolute;
+    float: right;
+    text-align: start;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 4;
+    box-sizing: border-box;
+    transition: .5s ease;
+}
+.nav-list-items button{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+.menu-navbar{
+    position: fixed;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    z-index: 6;
+    
+}
+
 @media (max-width:720px) {
-    .Hamburger{
-        display: block;
-    }
+   
     .navList{
         display: none;
     }

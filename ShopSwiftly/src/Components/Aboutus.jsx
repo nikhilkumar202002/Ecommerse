@@ -1,12 +1,33 @@
 import React from 'react'
+import { useEffect, useState } from 'react';
 import './Aboutus.css'
 import Aboutimage from '../Images/jason-goodman-Oalh2MojUuk-unsplash.jpg'
 
 function Aboutus() {
+    const [isVisible, setIsVisible] = useState(false);
+    useEffect(() => {
+        const handleScroll = () => {
+          const aboutSection = document.querySelector('.aboutus_content');
+          if (aboutSection) {
+            const topPosition = aboutSection.getBoundingClientRect().top;
+            const bottomPosition = aboutSection.getBoundingClientRect().bottom;
+    
+            const isInViewport = topPosition < window.innerHeight && bottomPosition >= 0;
+            setIsVisible(isInViewport);
+          }
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+        // Clean up the event listener
+        return () => {
+          window.removeEventListener('scroll', handleScroll);
+        };
+      }, []);
+   
   return (
     <>
     
-        <div className='aboutus_content'>
+        <div className={`aboutus_content ${isVisible ? 'visible' : ''}`}>
             <div className='aboutus_left_content'>
                 <img src={Aboutimage} alt="" />
             </div>

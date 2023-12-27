@@ -1,76 +1,87 @@
 .homecardheading h1{
-    padding: 100px 40px 0px;
+    /* padding: 100px 40px 0px */
     font-family: "Poppins";
     font-size: 30px;
     letter-spacing: 2px;
     font-weight: 800;
     color: rgb(42, 42, 42);
 }
-.homeCards{
-    width: 100%; 
-    overflow-x: scroll;
+.homecardheading{
+    text-align: center;
+    padding-top: 100px;
 }
-.homeCards::-webkit-scrollbar{
-    overflow-x: hidden;
-}
+
 .homepageCards{
-    width: 100%;
-    display: grid;
-    grid-auto-flow: column;
-    gap: 1rem;
-    padding-bottom: 1rem;
-    padding: 40px;
+    width: 80%;
+    margin: auto;
+    /* border: 1px solid; */
+    display: flex;
     box-sizing: border-box;
+    gap: 10px;
+    display: flex;
+    flex-wrap: nowrap; 
+    padding: 30px 0px 30px;
+    overflow-x: auto;
 }
+.homepageCards::-webkit-scrollbar {
+    display: none;
+  }
 .homeCard{
     width: 300px;
-    height: 400px;
-    background-color: rgb(242, 242, 242);
-    border-radius: 20px;
+    height: 500px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    border: 1px solid rgb(226, 226, 226);
     position: relative;
+    flex: 0 0 calc(25% - 20px); /* Adjust width of each card and spacing between cards */
+    
 }
 .homeCardimage{
-    width: 95%;
-    height: 50%;
-    margin: 7px;
+    width: 280px;
+    margin: 4px auto;
+    height: 260px;
+    justify-content: center;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 4px 0px;
     position: absolute;
 }
 .homeCardimage img{
     width: 100%;
-    /* height: 40%; */
-    /* transform: translateY(-40px); */
     object-fit: cover;
 }
 .homeCarddetails{
-    /* position: absolute; */
-    padding-top: 200px;
-    padding-left: 15px;
-    line-height: 10px;
+    padding-top: 260px;
+    padding-left: 20px;
+    /* padding-right: 20px; */
 }
 .homeproductmore{
     text-align: center;
+    padding-top: 30px;
+    
 }
 .homeproductmore button{
-    width: 200px;
-    height: 56px;
+    padding: 12px 40px;
     font-size: 18px;
-    font-weight: 600;
-    background-color: #FD7B2B;
-    color: white;
-    border: none;
-    border-radius: 30px;
+    font-weight: 500;
+    font-family: "Poppins";
+    background-color: transparent;
+    border: 1px solid #FD7B2B;
+    color: #FD7B2B;
+    border-radius: 4px;
 }
 .homeproductmore button:hover{
-    background-color: white;
+    color: white;
     transition: .5s;
-    color: #FD7B2B;
-    border: 1px solid #FD7B2B;
+    background-color: #FD7B2B;
 }
 .pname p{
-    font-size: 16px;
+    font-size: 17px;
+    font-weight: 500;
+    color: rgb(31, 31, 31);
     font-family: "Poppins";
+    text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
 }
 .productDetails p{
     font-size: 15px;
@@ -98,3 +109,60 @@
     font-size: 15px;
     font-family: "Poppins";
 }
+
+.card-rating{
+    display: flex;
+    align-items: center;
+
+}
+.rating-number p{
+    font-size: 12px;
+    font-family: "Poppins";
+    font-weight: 500;
+    color: rgb(39, 39, 39);
+    padding-left: 4px;
+}
+.card-description p{
+    font-size: 14px;
+    line-height: 22px;
+    color: rgb(100, 100, 100);
+    font-family: "Poppins";
+}
+.card-description {
+    height: 80px;
+    width: 100%;
+    text-overflow: ellipsis !important;
+    overflow: hidden;
+    margin-top: -20px;
+  }
+  .card-price-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -25px;
+  }
+  .price p{
+    font-size: 25px;
+    font-family: "poppins";
+    font-weight: 600;
+    color: #3A1300;
+  }
+  .button button{
+    font-size: 15px;
+    font-family: "poppins";
+    background-color: #FD7B2B;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 30px;
+    color: white;
+  }
+  .button{
+    margin-right: 20px;
+  }
+  .homeCard {
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+  }
+  .homeCard.animate {
+    opacity: 1;
+  }
