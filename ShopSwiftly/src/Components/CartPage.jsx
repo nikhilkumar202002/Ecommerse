@@ -48,7 +48,9 @@ function CartPage() {
         }
 
     })
-
+    const setDisplayRazorpayState = (value) => {
+        setDisplayRazorpay(value);
+      };
     const getItems = () => {
         try {
             console.log("get cart working")
@@ -215,6 +217,7 @@ function CartPage() {
                             orderId={orderDetails.orderId}
                             keyId="rzp_test_ZQzRHblUiM9SYF"
                             keySecret="Ba9TrQ7sz2SkoeWwliVfhP3R"
+                            setDisplayRazorpayCallback={setDisplayRazorpayState}
                         />
                     )
                 }

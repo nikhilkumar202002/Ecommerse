@@ -18,7 +18,7 @@ function Sidebar() {
                 <div className='items'><Link to='/adminaddcat'>Add Category</Link></div>
                 <div className='items'><Link to='/adminorder'>Orders</Link></div>
                 <div className='items'><Link to='/admincustomerview'>Customers</Link></div>
-                <div className='items'><Link to='/'>Settings</Link></div>
+                <div className='items'><Link to='/adminsettings '>Settings</Link></div>
                 <div className='items'><Link to='/'>Logout</Link></div>
 
             </div>

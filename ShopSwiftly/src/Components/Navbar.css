@@ -181,8 +181,7 @@
 }
 .nav-list-items a:hover{
     color: #ff6a00;
-    transition: .5s;
-    font-weight: 600;
+    transition: all .2s;
 
 }
 .nav-list-items{

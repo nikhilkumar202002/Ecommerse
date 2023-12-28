@@ -10,7 +10,8 @@ const RenderRazorpay = ({
   keySecret,
   currency,
   amount,
-  serverBaseUrl, // You should define serverBaseUrl
+  serverBaseUrl,
+  setDisplayRazorpayCallback // You should define serverBaseUrl
 }) => {
   const navigate = useNavigate();
   const {user,setUser} = useContext(UserContext)
@@ -60,7 +61,11 @@ const RenderRazorpay = ({
         orderDetails,
         user
       });
-      navigate('/')
+      if(status ==='succeeded'){
+            navigate('/')
+      }
+      console.log("Payment Completed")
+   
     } catch (error) {
       console.error('Error handling payment:', error);
     }
@@ -71,7 +76,7 @@ const RenderRazorpay = ({
       key: keyId, // Add your Razorpay key
       amount: amount * 100, // Amount should be in the smallest currency unit (e.g., cents for USD)
       currency,
-      name: 'Your Company Name',
+      name: 'BytrBoot',
       description: 'Payment for your order',
       order_id: orderId,
       handler: (response) => {
@@ -82,6 +87,10 @@ const RenderRazorpay = ({
         // Most important step to capture and authorize the payment. This can be done of Backend server.
         const succeeded = cryptojs.HmacSHA256(`${orderId}|${response.razorpay_payment_id}`, keySecret).toString() === response.razorpay_signature;
         console.log(succeeded,"hi")
+        // handlePayment('timedout');
+
+        // setDisplayRazorpay(false)
+    
         // If successfully authorized. Then we can consider the payment as successful.
         if (succeeded) {
           handlePayment('succeeded', {

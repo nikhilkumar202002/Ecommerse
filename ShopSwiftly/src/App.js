@@ -16,6 +16,7 @@ import { UserContext } from './Static/UserContext';
 import AdminSignIn from './Admin/Pages/Adminsignin'
 import AdminCust from './Admin/Pages/Customers';
 import CategorySinglePage from './Pages/CategorySingle';
+import SettingsPage from './Admin/Pages/Settings'
 
 function App() {
       const [user, setUser] = useState(null);
@@ -52,6 +53,7 @@ function App() {
     <Route path='adminorder' element={<Adminod/>}/>
     <Route path='adminsignin' element={<AdminSignIn/>}/>
     <Route path='admincustomerview' element={<AdminCust/>}/>
+    <Route path='adminsettings' element={<SettingsPage/>}/>
 
  </Routes>
 </UserContext.Provider>
